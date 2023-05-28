@@ -28,6 +28,8 @@ struct LandmarkRow: View {
              **/
             
             Spacer()
+            
+            // 여기까지 Section 2
         }
     }
     
