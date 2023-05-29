@@ -51,9 +51,18 @@ struct LandmarkList: View {
 //        }
         
         // Landmark 에 identifiable 프로토콜을 추가했기 때문에 id 파라미터를 삭제할 수 있다.
-        
-        List(landmarks) { landmark in
-            LandmarkRow(landmark: landmark)
+        // Section 6 - Navigation View 추가
+        NavigationView {
+            List(landmarks) { landmark in
+                NavigationLink {
+                    LandmarkDetail()
+                } label: {
+                    LandmarkRow(landmark: landmark)
+                }
+            }
+            
+            .navigationTitle("Landmarks")
+            // Section 6 End
         }
         
         // 이제 Landmarks collection 에 직접 접근하여 사용 할 수 있다.
