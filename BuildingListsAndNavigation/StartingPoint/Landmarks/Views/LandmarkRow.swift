@@ -37,6 +37,37 @@ struct LandmarkRow: View {
 
 struct LandmarkRow_Previews: PreviewProvider {
     static var previews: some View {
-        LandmarkRow(landmark: landmarks[0])
+        /**
+         .previewLayout(<#T##value: PreviewLayout##PreviewLayout#>)
+          - 리스트 내 하나의 열에 가까운 사이즈를 설정하는 역할 (set a size that approximates a row in a list.)
+         
+        Group 구조체
+         - Views, scenes, commands 와 같은 하나의 content type 의 여러 인스턴스를 하나의 유닛으로 모으는 타입을 말한다. (Xcode Summary)
+         - Group 은 하나의 컨테이너 이고 View content 를 그룹핑하기 위해 사용된다. Xcode 는 그룹의 자식 뷰들을 캔버스 내에 분리된 프리뷰로 렌더링한다.
+         - Canvas 내에 Landmark Row 가 하나에서 두 개로 변경된 것을 알 수 있다.
+         **/
+        
+        // Simplify Code - Before
+        
+//        Group {
+//            LandmarkRow(landmark: landmarks[0])
+//                .previewLayout(.fixed(width: 300, height: 70))
+//            LandmarkRow(landmark: landmarks[1])
+//                .previewLayout(.fixed(width: 300, height: 70))
+//        }
+        
+        // Simplify Code - After
+        
+        Group {
+            LandmarkRow(landmark: landmarks[0])
+            LandmarkRow(landmark: landmarks[1])
+        }
+        .previewLayout(.fixed(width: 300, height: 70))
+        
+        // Simplify Code Point - A view’s children inherit the view’s contextual settings, such as preview configurations.
+        
+        
+    
+        
     }
 }
