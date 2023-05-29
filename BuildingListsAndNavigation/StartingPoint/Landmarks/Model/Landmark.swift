@@ -10,7 +10,14 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct Landmark: Hashable, Codable {
+/**
+Section 5 - Identifiable
+ List 코드를 Landmark 타입에 identificable 을 준수하도록 추가함으로서 단순화한다.
+ 
+ Landmark 의 데이터는 이미 identifiable 프로토콜에 의해 요구되는 id 프로퍼티를 가지고 있다. 여기서는 데이터를 읽을 때 디코딩 하기 위해서 필요하다.
+ */
+
+struct Landmark: Hashable, Codable, Identifiable {
     var id: Int
     var name: String
     var park: String
