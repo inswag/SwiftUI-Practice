@@ -46,6 +46,66 @@ SwiftUI 코드 블록에서, if 조건문을 뷰를 포함하기 위해 조건�
 별은 landmark 의 isFavorite 프로퍼티가 true 일 때마다 나타나요. 이번 튜토리얼에서 후에 프로퍼티를 어떻게 수정하는지 알게 될거에요.
 
 
+## Section 2 - 리스트 뷰를 필터링하기
+
+
+모든 landmark 혹은 유저가 픽한 landmark 만 보여 줄 수 있도록 list view 를 커스터마이징 할 수 있어요. 이렇게 하려면 LandmarkList 타입에 약간의 상태(State)를 추가해야 해요.
+
+'State' 는 하나의 값(a value) 이거나 값의 집합(a set of values)으로, 시간이 지남에 따라 변경될 수 있고 뷰의 동작(behavoir), 콘텐츠(content), 레이아웃(layout)에 영향을 줄 수 있어요.
+
+@State 어트리뷰트(attribute) 를 가지는 프로퍼티를 사용해 뷰에 상태(state) 를 추가해보세요.
+
+### Step 1
+
+LandmarkList.swift 파일로 돌아가 preview 를 단일로 변경해주세요.
+
+### Step 2
+
+
+@State를 showFavoritesOnly 라는 프로퍼티에 추가해주세요. 초기 값은 false 로 설정해요.
+
+뷰와 뷰의 서브뷰에 알맞은 정보를 홀딩하기 위해 state 프로퍼티를 사용하기 때문에, 항상 state 를 private 으로 생성합니다.
+(Because you use state properties to hold information that’s specific to a view and its subviews, you always create state as private.)
+
+### Step 3
+
+Canvas 를 리프레쉬 해주세요.
+
+프로퍼티를 추가하거나 수정하는 것 과 같이 뷰의 구조에 변화를 줄 때, 수동적으로 Canvas 를 리프레쉬 해주어야 해요.
+
+### Step 4
+
+FavoritesOnly 프로퍼티와 각각의 landmark.isFavorite 값을 체크하여 Landmark 리스트의 필터링 된 버전을 계산해요. 
+
+### Step 5
+
+List 내에서 landmark 리스트의 필터링 된 버전을 사용해요.
+
+### Step 6
+
+showFavoritesOnly 의 초기값을 true 로 변경해 어떻게 리스트가 반응하는지 보세요.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
