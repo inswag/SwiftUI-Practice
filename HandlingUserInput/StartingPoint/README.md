@@ -87,6 +87,40 @@ showFavoritesOnly 의 초기값을 true 로 변경해 어떻게 리스트가 반
 
 
 
+## Section 3 - State 를 토글하기 위한 컨트롤 추가하기(Add a Control to Toggle the State)
+
+유저가 리스트의 필터를 컨트롤 하기 위해서는 showFavoriteOnly 의 값을 대체(alter) 할 수 있는 컨트롤을 추가해야 해요. 이걸 바인딩한 값을 토글 컨트롤에 전달하는 식으로 해볼게요.
+
+'Binding' 은 mutable state 에 대한 참조(reference)로 작동해요. 유저가 토글을 off에서 on 으로 그리고 다시 off 로 탭할 때 컨트롤은 binding으로 뷰의 스테이트를 적절히 업데이트하기 위해 사용해요.
+
+To give the user control over the list’s filter, you need to add a control that can alter the value of showFavoritesOnly. You do this by passing a binding to a toggle control.
+
+A binding acts as a reference to a mutable state. When a user taps the toggle from off to on, and off again, the control uses the binding to update the view’s state accordingly.
+
+
+### Step 1
+
+중첩된 ForEach 그룹을 각 열 내 랜드마크로 변형하기 위해 생성합니다.
+
+리스트 내 정적, 동적 뷰들을 결합하기 위해 혹은 두 개 이상의 다른 그룹의 동적 뷰들을 결합하기 위해서 data collection 을 List 에 전달하는 것 대신 ForEach 타입을 사용해요.
+
+
+### Step 2
+
+Toggle 뷰를 List 뷰의 첫번째 자식 뷰로 추가해요, FavoritesOnly 를 나타내기 위해 바인딩으로 전달해요.
+Prefix $ 를 state 변수 혹은 state 변수의 프로퍼티 중 하나에 대한 바인딩에 접근하기 위해 사용해요.
+
+Add a Toggle view as the first child of the List view, passing a binding to showFavoritesOnly.
+You use the $ prefix to access a binding to a state variable, or one of its properties.
+
+### Step 3
+
+위로 돌아와서, showFavoritesOnly 를 false 로 디폴트 값을 리턴합니다.
+
+### Step 4
+
+Preview 로 변경된 모습을 확인해보세요.
+
 
 
 
