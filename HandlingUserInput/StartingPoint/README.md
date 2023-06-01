@@ -200,7 +200,51 @@ LandmarksApp 을 model instance 를 생성하고 environmentObject(_:) modifier 
 LandmarkList.swift 파일로 돌아와서 live preview 를 켜 모든 것이 적절히 작동하는지 확인해보세요.
 
 
+## Section 6 - 각각의 Landmark에 Favorite 버튼 생성하기(Create a Favorite Button for Each Landmark)
 
+Landmarks 앱은 이제 랜드마크의 필터링된 뷰와 필터링 되지 않은 뷰를 스위칭할 수 있어요. 하지만 favorite landmarks 의 리스트는 여전히 하드코딩 되어 있어요. 유저가 favorite을 추가하거나 제거할 수 있게 하도록 favorite 버튼을 을 landmark detail 뷰에 추가할 필요가 있어요.
+
+### Step 1
+
+FavoriteButton.swift 이름의 새로운 뷰를 생성해요.
+
+### Step 2
+
+isSet 이라는 바인딩을 추가해요, 얘는 버튼의 현재 상태를 나타내고 프리뷰에 상수 값을 제공해요.
+
+바인딩을 사용하고 있기 때문에 이 뷰 내에서 만들어지는 변화들은 데이터 소스로 다시 전파됩니다(propagate).
+
+### Step 3
+
+isSet 의 상태를 토글하고 상태에 따라 버튼의 외형이 변화하는 액션을 가진 버튼을 생성해요.
+
+버튼의 레이블에 제공하는 문자열 타이틀은 UI에서는 나타나지 않아요 iconOnly 의 레이블 스타일을 사용한다면요. 하지만 VoiceOver는 접근성을 향상시키기 위해 레이블 스타일을 사용해요.
+
+* 프로젝트가 진행될수록 폴더 계층을 나눠주는 것은 꼬ㅒ 좋은 아이디어에요. 진행하기 전에 정리하고 넘어가보죠.
+
+### Step 4
+
+일반적인 목적에 따라 Helpers 폴더의 CircleImage, MapView, FavoriteButton.swift 파일을 모으고 랜드마크 뷰들은 Landmarks 그룹에 모아주세요.
+
+* 다음으로 FavoriteButton 을 detail view 에 추가할거에요. 주어진 landmark 의 isFavorite 프로퍼티에 버튼의 isSet 프로퍼티에 바인딩합니다. (Next, you’ll add the FavoriteButton to the detail view, binding the button’s isSet property to the isFavorite property of a given landmark.)
+
+### Step 5
+
+LandmarkDetail.swift 파일로 이동해 model data 와 함께 인덱스를 비교함으로서 input landmark 의 인덱스를 계산해주세요.
+
+이것을 지원하기 위해서 environment's model data 에 접근할 필요가 있어요.
+
+### Step 6
+
+HStack 에 새로운 FavoriteButton 과 함께 임베드된 landmark의 이름은 달러 표시($)를 가진 isFavorite 프로퍼티에 대한 바인딩을 제공해요.
+
+landmarkIndex 를 modelData 객체와 함께 버튼이 model object 에 저장된 랜드마크의 isFavorite 프로퍼티에 대한 업데이트를 보증할 수 있게 사용해주세요. (Use landmarkIndex with the modelData object to ensure that the button updates the isFavorite property of the landmark stored in your model object.)
+
+### Step 7
+
+LandmarkList.swift 로 돌아와 라이브 프리뷰를 확인하세요.
+
+리스트에서 디테일로 이동하거나, 버튼을 탭하거나와 같이 이러한 변화들은 지속됩니다 여러분이 리스트로 돌아왔을 때 말이죠. 왜냐하면 양 뷰는 environment 내에서 같은 모델 객체를 접근하고 있기 떄문에, 두 개의 뷰는 동시성(consistency) 를 유지해요.
 
 
 
