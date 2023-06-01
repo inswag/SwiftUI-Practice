@@ -155,8 +155,49 @@ Observable Object는 Subscriber가 변경 사항을 선택할 수 있도록(can 
 
 @Published 어트리뷰트를 Landmarks 배열에 추가합니다.
 
+## Section 5 - 뷰에 Model Object 를 채택하기(Adopt the Model Object in Your Views)
+
+이제 ModelData object 를 생성했으니, 앱에 데이터 저장소로서 객체를 뷰에 채택하도록 업데이트 해야 해요.
+
+### Step 1
+
+LandmarkList.swift 파일에서 @Environment Object 프로퍼티 선언을 뷰에 추가하고 environmentObject(_:) modifier 를 preview 에 추가하세요.
+
+modelData 프로퍼티는 environmentObject(_:) modifier가 부모에 적용되는 한 자동으로 값을 가져와요. 
+
+### Step 2
+
+랜드마크를 필터링 할 때의 데이터로서 modelData.landmarks 를 사용하세요.
+
+### Step 3
+
+LandmarkDetail 뷰가 environment 내 ModelData 객체와 함께 작동할 수 있게 업데이트 합니다.
+
+### Step 4
+
+LandmarkRow 프리뷰를 ModelData object 와 함께 작동할 수 있게 업데이트 합니다.
+
 ### Step 5
 
+ContentView 의 프리뷰도 객체가 모든 하위 뷰에 이용가능할 수 있게(available) 만들어주는 environment 에 model object 를 추가하도록 업데이트 합니다.
+
+Preview 는 만약 모든 하위 뷰가 environment 내 model object 를 필요로 한다면 실패하지만, 프리뷰잉하고 이쓴ㄴ 뷰는 environmentObject(_:) modifier 를 가지지 않아도 됩니다.
+
+-----------------
+
+다음은, 디바이스 혹은 시뮬레이터에서 앱을 작동할 때, environment 내에 model object를 두기 위해, 앱 인스턴스를 업데이트 할거에요. 
+
+### Step 6
+
+LandmarksApp 을 model instance 를 생성하고 environmentObject(_:) modifier 를 사용해 ContentView 에 인스턴스를 공급할 수 있게 업데이트 할거에요. (Update the LandmarksApp to create a model instance and supply it to ContentView using the environmentObject(_:) modifier.)
+
+@StateObject 어트리뷰트를 앱의 생애동안 오직 한번 해당 프로퍼티에 대해 model object 를 초기화하기(initialize) 위해 사용해요. 
+여기에 보여지는 것 처럼 App Instance 내 어트리뷰트를 사용할 때 뷰 내에서 어트리뷰트를 사용할 때와 마찬가지로 언제나 맞는 이야기에요.
+(Use the @StateObject attribute to initialize a model object for a given property only once during the life time of the app. This is true when you use the attribute in an app instance, as shown here, as well as when you use it in a view.)
+
+### Step 7
+
+LandmarkList.swift 파일로 돌아와서 live preview 를 켜 모든 것이 적절히 작동하는지 확인해보세요.
 
 
 
