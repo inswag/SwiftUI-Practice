@@ -122,8 +122,40 @@ You use the $ prefix to access a binding to a state variable, or one of its prop
 Preview 로 변경된 모습을 확인해보세요.
 
 
+## Section 4 - 저장소 에서 Observable Object 사용하기 (Use an Observable Object for Storage)
+
+유저가 어떤 특정 랜드마크를 픽했는지에 대한 컨트롤을 준비하기 위해, 먼저 landmark data 를 observable object에 저장할 거에요.
+
+Observable object 는 여러분의 데이터에 대한 커스텀 객체인데  SwiftUI 환경의 저장소에서 뷰에 바인딩 될 수 있어요. SwiftUI는 뷰에 영향을 줄 수 있는 observable object 에 대한 모든 변화를 관찰하고 변화 후의 뷰에 현재 상태를 표시해요.
 
 
+To prepare for the user to control which particular landmarks are favorites, you’ll first store the landmark data in an observable object.
+
+An observable object is a custom object for your data that can be bound to a view from storage in SwiftUI’s environment. SwiftUI watches for any changes to observable objects that could affect a view, and displays the correct version of the view after a change.
+
+### Step 1
+
+ModelData.swift 파일을 선택하세요.
+
+### Step 2
+
+Combine 프레임워크로부터 ObservableObject 프로토콜을 준수하는 새로운 모델 타입을 선언하세요. 
+
+SwiftUI는 observable object를 구독하고 데이터가 변경될 때 리프레시를 필요로 하는 모든 뷰를 업데이트해요.
+
+### Step 3
+
+Landmarks 배열을 모델로 옮겨주세요.
+
+Observable object 는 데이터에 대한 모든 변경사항들을 publish 할 필요가 있고 변경사항들을 구독하는 것들은 변화를 pick up 할 수 있어요.
+
+Observable Object는 Subscriber가 변경 사항을 선택할 수 있도록(can pick up) 데이터 변경 사항을 게시해야(publish) 합니다.
+
+### Step 4
+
+@Published 어트리뷰트를 Landmarks 배열에 추가합니다.
+
+### Step 5
 
 
 
