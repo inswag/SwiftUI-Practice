@@ -91,5 +91,43 @@ SwiftUI를 사용해 보세요. 다양한 애니메이션 효과를 결합하여
 * effect modifier 를 추가 한 후, animation 에 nil 을 주면 상위의 effect 는 작동하지 않는다.
 
 
+## Section 3 - 상태 변화 효과에 애니메이션을 부여하기(Animate the Effects of State Changes)
+
+각각의 뷰에 애니메이션을 적용하는 법을 배웠으니 이번에는 상태의 값(state's value) 을 변경 한 곳에서 애니메이션을 추가해보죠.
+
+유저가 버튼을 탭하고 showDetail state 프로퍼티를 토글할 때마다 발생하는 모든 변경사항 들에 애니메이션을 적용해볼게요
+
+Now that you’ve learned how to apply animations to individual views, it’s time to add animations in places where you change your state’s value.
+
+Here, you’ll apply animations to all of the changes that occur when a user taps a button and toggles the showDetail state property.
+
+### Step 1
+
+withAnimation 함수를 호출해 closure 구문 내에 showDetail.toggle() 추가해주세요.
+
+* showDetail 프로퍼티에 의해 영향을 받는 양 뷰들은(disclosure 버튼 과 HikeDetail 뷰) 이제 애니메이션 전환을 가지게 되었어요.
+
+### 어떻게 SwiftUI의 애니메이션이 중단될 수 있는지 보기 위해 애니메이션을 늦춰주세요.
+
+### Step 2
+
+4초 길이의 긴 기초 애니메이션을  withAnimation 함수에 전달할게요.
+
+* 동일한 종류의 애니메이션을 animation(_:value:) modifier에 전달한 withAnimation 함수에 전달 할 수 있어요.
+
+### Step 3
+
+애니메이션 중간에 그래프 보기를 열고 닫는 실험을 해보세요.
+
+### Step 4
+
+다음 섹션으로 진행하기 전에 withAnimation 함수의 input parameter 를 제거해 디폴트 애니메이션을 사용할 수 있게 복원해주세요.
+
+### Section 3 학습 결과
+
+* withAnimation의 parameter 에 효과를 추가하는 방법을 학습. State 의 value 가 변경 될 떄 애니메이션을 줄 수 있다.
+* 애니메이션 테스트 시 duration 값을 통해 천천히 변화하는 과정을 학습
+
+
 
 
