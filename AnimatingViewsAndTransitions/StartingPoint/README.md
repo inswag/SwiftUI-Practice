@@ -129,5 +129,41 @@ withAnimation 함수를 호출해 closure 구문 내에 showDetail.toggle() 추�
 * 애니메이션 테스트 시 duration 값을 통해 천천히 변화하는 과정을 학습
 
 
+## Section 4 - 뷰 트랜지션 커스터마이징하기(Customize View Transitions)
+
+기본으로 뷰 트랜지션은 화면 상에 나타났다 사라지는 fade in/out 으로 작동합니다. 이 트랜지션을 transition(_:) modifier 를 사용해 커스터마이징 해보세요.
+
+### Step 1
+
+Transition(_:) modifier 를 조건에 따라 보이는 HikeView 에 추가해주세요.
+
+* 이제 그래프가 sliding in/out 에 따라 시야에서 나타났다 사라져요.
+
+### Step 2
+
+AnyTransition의 정적 프로퍼티로서 추가된 트랜지션으로 추출하고 뷰의 트랜지션 modifier 내에 새로운 프로퍼티로 접근하도록 합니다.
+
+* 이렇게 커스텀 트랜지션을 확장해서 코드를 꺠끗하게 유지할 수 있어요.
+
+### Step 3
+
+move(edge:) 트랜지션을 사용하는 스위칭을 해볼게요. 그래프가 같은 측면에서에서 slide in/out 됩니다.
+(기존은 왼쪽에서 오른쪽으로 이동, 지금은 오른쪽에서 나타나 오른쪽으로 사라진다)
+
+### Step 4
+
+이번에는 asymmetric(insertion:removal:) modifier를 사용해 다른 트랜지션을 줘볼게요. 뷰가 나타나고 사라질 때 말이죠.
+
+### Section 4 학습
+* AnyTransition 타입의 extension을 사용해 코드의 가독성을 높이는 방식으로 코드를 짜면 좋을 것 같다.
+* 또한 이 AnyTransion 의 .asymmetric modifier 를 사용하면 뷰의 삽입/제거 시 애니메이션을 다양하게 줄 수 있다.
+* Body 에 모두 선언된다면 상당히 Body 가 무거워지고 보기 좋지 않긴 하겠다.
+
+
+
+
+
+
+
 
 
