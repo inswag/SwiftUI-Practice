@@ -49,3 +49,47 @@ HikeView.swift 에서 Preview 를 켜고 작동을 확인해보세요.
 
 * 각 단계의 결과를 실험할 수 있도록 이 튜토리얼 전체에서 라이브 프리뷰를 사용해주세요.
 
+## Section 2 - 각 뷰에 애니메이션 추가하기(Add Animations to Individual Views)
+
+Animation(_:) modifier 를 동일시되는 뷰상에서 사용할 떄, SwiftUI는 뷰의 애니메이팅 할 수 있는 프로퍼티에 대한 모든 변화에 애니메이션을 부여합니다. 뷰의 컬러, 오퍼시티, 로테이션, 사이즈 등의 애니메이션화 되는 다른 프로퍼티들이 있어요. 뷰가 equatable 하지 않을 땐 animation(_:value:) modifier 를 사용해 특정 뷰가 변경될 때 애니메이션을 시작할 수 있어요.
+
+Equatable 이라는 표현이 조금 다가오지 않는데, 실습을 통해 이 의미에 대해 알아보죠.
+
+When you use the animation(_:) modifier on an equatable view, SwiftUI animates any changes to animatable properties of the view. A view’s color, opacity, rotation, size, and other properties are all animatable. When the view isn’t equatable, you can use the animation(_:value:) modifier to start animations when the specified value changes.
+
+### Step 1 
+
+HikeView.swift 에서 버튼의 방향에 대한 애니메이션을 켜줄게요. Animation modifier 를 추가할게요. showDetail 값의 변경을 따라갑니다.
+
+### Step 2
+
+또 다른 애니메이션 변화를 추가할게요. 그래프가 보일 떄 버튼을 더 커지게 만들어줘요.
+
+* animation modifier 는 모든 애니메이션 변경 사항에 적용 됩니다. Modifier 가 감싸고 있는 뷰 내에서요.
+
+### Step 3
+
+애니메이션의 타입을 easeInOut 에서 spring()으로 변경해주세요.
+
+* SwiftUI는 사전에 정의되거나 Spring 이나 fluid 애니메이션 처럼 커스텁하기 쉬운 기본적인 애니메이션을 포함하고 있어요. 이 애니메이션의 스피드를 조정하거나 애니메이션이 시작하기 전 딜레이를 설정하거나 애니메이션의 반복을 결정하는 것도 가능하죠.
+
+### Step 4
+
+회전(Rotation) 애니메이션을 scaleEffect modifier 코드 바로 위에 다른 애니메이션 modifier를 추가해서 애니메이션을 끄도록 해보세요.
+
+* Experiment : 
+SwiftUI를 사용해 보세요. 다양한 애니메이션 효과를 결합하여 무엇이 가능한지 확인하는 것은 좋은 경험이 될 거에요.
+
+### Step 5
+
+다음 섹션으로 넘어가기 전에 두 개의 애니메이션 modifier 를 제거해주세요. 
+
+### Section 2 학습 결과
+
+* animation(_:) modifier 를 사용하면 쉽게 애니메이션 효과를 줄 수 있다. 
+* SwiftUI의 애니메이션은 기본적인 애니메이션 효과를 지원하고 커스텀이 가능하다. UIKit에서 구현하는 것보다 비교적 쉽다.
+* effect modifier 를 추가 한 후, animation 에 nil 을 주면 상위의 effect 는 작동하지 않는다.
+
+
+
+
