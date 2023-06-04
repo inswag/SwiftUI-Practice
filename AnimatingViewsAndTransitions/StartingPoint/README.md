@@ -160,9 +160,44 @@ move(edge:) 트랜지션을 사용하는 스위칭을 해볼게요. 그래프가
 * Body 에 모두 선언된다면 상당히 Body 가 무거워지고 보기 좋지 않긴 하겠다.
 
 
+## Section 5 여러 효과의 애니메이션을 결합하기(Compose Animations for Complex Effects)
 
+그래프는 바 아래의 버튼을 클릭할 때면 세 개의 다른 데이터 집합(sets of data) 사이에서 스위칭됩니다. 이번 섹션에서 복합 애니메이션을 사용해 그래프를 구성하는 캡슐에 동적이고 물결치는 전환을 제공해볼게요.
 
+The graph switches between three different sets of data when you click the buttons below the bars. In this section, you’ll use a composed animation to give the capsules that make up the graph a dynamic, rippling transition.
 
+### Step 1
+
+HikeView에서 showDetail 의 기본값을 true 로 변경하고 Canvas 의 Preview 를 확인해주세요.
+
+* Pin ? 이렇게 하면 다른 파일에서 애니메이션 작업을 하는 동안 컨텍스트에서 그래프를 볼 수 있습니다.
+
+### Step 2
+
+HikeGraph.swift 에서 새로운 잔물결(Ripple) 애니메이션을 정의하고 생성된 각 그래프 캡슐에 적용해보세요.
+
+### Step 3
+
+애니메이션을 스프링 애니메이션으로 바꿔볼까요? 선언한 코드는 감쇠율을(damping fraction) 줄임으로써 막대가 뛰도록 합니다. (감쇠율이라는 말이 어려우니 애니메이션을 통해 마음으로 느끼고 갑니다..)
+
+* 프리뷰에서 elevation, heart rate, pace 사이를 스위칭해 애니메이션 효과를 볼 수 있습니다.
+
+### Step 4
+
+약간만 애니메이션 속도를 높여볼까요? 각 막대가 새 위치로 이동하는 데 걸리는 시간을 단축할게요.
+
+### Step 5
+
+그래프 상의 캡슐의 위치에 기반하는 각 애니메이션에 딜레이를 추가해주세요.
+
+### Step 6
+
+그래프 사이를 트랜지셔닝할 때마다 잔물결 효과를 제공하는 커스텀 애니메이션이 어떻게 작동하는지 관찰해보세요. 
+
+### Section 5 학습
+
+* Animation extension 을 통해 Custom animation 을 만드는 방법에 대해 이해할 수 있었다.
+* ForEach 와 enumerated() 가 제공하는 index 를 통해 시간차를 주는 애니메이션을 구현하는 방법을 이해했다.
 
 
 
