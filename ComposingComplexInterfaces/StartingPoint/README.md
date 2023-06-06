@@ -199,3 +199,97 @@ Set the edge insets to zero on both kinds of landmark previews so the content ca
 ### Section 4 학습
 
 * 이미지 modifier 들에 대한 이해
+
+## Section 5 - 섹션 사이에 네비게이션 추가하기(Add Navigation Between sections)
+
+다르게 카테고리화된 모든 랜드마크가 뷰에 표시되므로, 유저는 앱의 각 섹션에 도달할 수 있는 방법이 필요해요. Navigation과 Presentation API를 사용해 CategoryHome, DetailView, Favorites list를 tab view에서 탐색할 수 있도록 할게요.
+
+With all of the differently categorized landmarks visible in the view, the user needs a way to reach each section in the app. Use the navigation and presentation APIs to make the category home, the detail view, and favorites list navigable from a tab view.
+
+### Step 1
+
+CategoryRow.swift 에서 현재 CategoryItem을 NavigationLink로 래핑할게요.
+
+* category item 은 그 자체로 버튼에 대한 레이블이며 그 목적지는 카드에 의해 표시된 랜드마크에 대한 landmark detail view 가 됩니다. 
+
+In CategoryRow.swift, wrap the existing CategoryItem with a NavigationLink.
+
+The category item itself is the label for the button, and its destination is the landmark detail view for the landmark represented by the card.
+
+Before next step) 프리뷰를 고정하면 CategoryRow 에서 다음 단계의 효과를 볼 수 있어요. (Pin the preview so you can see the effect of the next step on the CategoryRow.)
+
+### Step 2
+
+renderingMode(_:) 와 foregroundColor(_:) modifier를 적용해서 Category item들의 navigation appearance를 변경할게요.
+
+* Navigation Link의 Label로 전달하는 텍스트는 환경의 강조 색상을 사용하여 렌더링되며 이미지는 템플릿 이미지로 렌더링될 수 있어요. 설계에 가장 적합하도록 동작을 수정할 수 있어요.
+
+Change the navigation appearance of the category items by applying the renderingMode(_:) and foregroundColor(_:) modifiers.
+
+Text that you pass as the label for a navigation link renders using the environment’s accent color, and images may render as template images. You can modify either behavior to best suit your design.
+
+Before Next Step) 다음으로 앱의 메인 content view를 수정해 사용자가 방금 만든 Category View와 기존 랜드마크 목록 중에서 선택할 수 있는 탭 뷰를 표시할게요.
+
+Next you’ll modify the app’s main content view to show a tab view that lets the user choose between the category view you just created, and the existing list of landmarks.
+
+### Step 3
+
+Preview 고정을 해제하고, ContentView로 이동해 tab을 표시하기 위한 열거형을 추가할게요.
+Unpin the preview, switch to the ContentView and add an enumeration of the tabs to display.
+
+### Step 4
+
+State 변수를 탭 선택을 위해 추가할게요 그리고 기본 값을 .featured 로 주도록 할게요.
+Add a state variable for the tab selection, and give it a default value.
+
+### Step 5
+
+Tab View 를 생성해 LandmarkList 와 CategoryHome 을 다음과 같이 래핑할게요.
+
+* 각 뷰의 tag(_:) modifier는 selection 프로퍼티가 가질 수 있는 가능한 값들 중 하나와 매칭돼요 그래서 TabView는 유저가 UI에서 선택을 했을 때 어떤 뷰가 표시 될 지 조정할 수 있어요.
+
+Create a tab view that wraps the LandmarkList, as well as the new CategoryHome.
+
+The tag(_:) modifier on each of the views matches one of the possible values that the selection property can take so the TabView can coordinate which view to display when the user makes a selection in the user interface.
+
+### Step 6
+
+각 tab에 label 을 줄게요.
+Give each tab a label.
+
+### Step 7
+
+라이브 프리뷰를 시작해 새로운 네비게이션을 시도해보세요.
+Start the live preview and try out the new navigation.
+
+### Section 5 학습
+
+* UITabViewController 대신 ContentView 에서 간단히 TabView 를 생성하고 modifier 를 이용해 쉽게 구현이 가능했다.
+* 각 탭은 역시 enum 으로 관리해야 제맛..
+
+## Check Your Understanding 
+
+Q 1 of 3
+
+Landmarks 앱의 root view 는 어떤 view 인가요?
+
+A 1 of 3
+
+ContentView 
+* app body에 정의된 WindowGroup scene은 app 의 root view 로서 ContentView 를 선언하고 있어요.
+
+Q 2 of 3
+ContentView 는 어떻게 app의 나머지로부터 코드를 사용하나요?
+
+A 2 of 3
+Number 3 -> ContentView는 navigation hierarchy 안에서 모든 landmark view들과 연결되어 있다.
+Landmarks 앱은 navigation view들을 포함해 모든 뷰들의 합이다.
+
+Q 3 of 3
+NavigationLink 내 뷰를 전환하기 위한 올바른 코드는 무엇인가요?
+
+A 3 of 3
+Number 2 -> Navigation Link { destination }, { label } 
+* 목적지와 레이블 둘 다 view builder closure 에 나타납니다.
+
+ 
