@@ -100,3 +100,81 @@ Switch to the live preview and try tapping the profile button to examine the pro
 * NavigationView 에 .toolBar modifier 를 통해 쉽게 버튼 추가가 가능하다.
 * .sheet modifier 를 활용해 UIKit 의 기본 present 스타일을 활용한 다음 뷰 보기가 가능했다.
 * 뷰 단위로 결합하는데 있어 SwiftUI 의 강점이 느껴졌다.
+
+
+## Section 2 - 편집 모드 추가하기(Add an Edit Mode)
+
+유저는 자신의 프로필 세부 정보를 보거나 편집하는 것 사이를 전환할 필요가 있어요. EditButton을 현재 ProfileHost에 추가하여 편집 모드를 추가해볼거에요 그리고 나서 각 값을 편집할 수 있는 컨트롤을 가진 뷰를 생성할거에요.
+
+Users need to toggle between viewing or editing their profile details. You’ll add an edit mode by adding an EditButton to the existing ProfileHost, and then creating a view with controls for editing individual values.
+
+### Step 1
+
+ProfileHost 파일을 선택하고 프리뷰 코드에 environment object인 model data를 추가하세요.
+
+* 이 뷰는 @EnvironmentObject 어트리뷰트를 가지는 프로퍼티를 사용하지 않지만, 이 뷰의 자식 뷰인 ProfileSummary 에서 사용해요. 그래서 modifier(.environmentObject(MOdelData()))가 없으면 프리뷰는 실패해요.
+
+Select ProfileHost and add the model data as an environment object to the preview.
+
+Even though this view doesn’t use a property with the @EnvironmentObject attribute, ProfileSummary, a child of this view, does. So without the modifier, the preview fails.
+
+### Step 2
+
+environment 의 \.editModel 키를 끄는 Environment 뷰 프로퍼티를 추가할게요.
+
+* SwiftUI는 . @Environmnet 프로퍼티 랩퍼를 사용해 environment 내에 접근할 수 있는 값을 위한 저장공간을 제공해요. editMode 값에 접근해 편집 범위를 읽거나 씁니다.
+
+Add an Environment view property that keys off of the environment’s \.editMode.
+
+SwiftUI provides storage in the environment for values you can access using the @Environment property wrapper. Access the editMode value to read or write the edit scope.
+
+### Step 3
+
+Environment의 editMode 값을 온 오프 하는 편집 버튼을 생성할게요.
+* EditButton은 이전 단게에서 엑세스한 것과 동일한 editMode environment value 를 제어해요.
+
+Create an Edit button that toggles the environment’s editMode value on and off.
+The EditButton controls the same editMode environment value that you accessed in the previous step.
+
+### Step 4
+
+ModelData 클래스로 돌아가 심지어 유저가 프로필 뷰를 사라지게 한 후에도 지속되는 유저 프로필 인스턴스를 포함하기 위해 이 클래스를 업데이트 해줄게요.
+
+Update the ModelData class to include an instance of the user profile that persists even after the user dismisses the profile view.
+
+### Step 5
+
+Environment 로부터 유저 프로필 데이터를 읽어 ProfileHost 에 데이터의 통제를 전달할게요.
+
+* 유저가 이름을 입력하는 동안과 같이 편집 내용을 확인하기 전에 global app state가 업데이트되지 않도록 editing view 는 자체 복사본에서 작동해요.
+
+Read the user’s profile data from the environment to pass control of the data to the profile host.
+
+To avoid updating the global app state before confirming any edits — such as while the user enters their name — the editing view operates on a copy of itself.
+
+### Step 6
+
+정적 프로필 혹은 편집 모드를 위한 뷰를 표시하는 conditional view 를 추가할게요.
+
+* 라이브 미리보기를 실행하고 편집 버튼을 누르면 편집 모드로 전환되는 효과를 볼 수 있어요. 현재 편집 모드 보기는 정적 텍스트 필드에 불과해요.
+
+Add a conditional view that displays either the static profile or the view for Edit mode.
+
+You can see the effect of entering edit mode by running the live preview and tapping the edit button. For now, the Edit mode view is just a static text field.
+
+### Section 2 학습
+
+* State 복습
+
+State는 하나의 값(a value)이거나 값의 집합(a set of values) 이면서 시간이 흘러가면서 바뀔 수 있다. 그리고 State는 뷰의 동작(Behavior), 내용(Content), 레이아웃(Layout) 에 영향을 준다.
+
+State를 뷰에 추가하려면 @State attribute와 함께 하는 하나의 프로퍼티(property)를 사용하면 된다. 
+
+* Observable Object 복습
+
+Observable object는 SwiftUI의 환경(SwfitUI's Environment)에서 저장소(Storage)로부터 바인딩 될 수 있는(can be bound to) 데이터에 대한 사용자 정의 객체(a custom object)이다. SwfitUI는 뷰에 영향을 줄 수 있는 observable object들에 대한 모든 변화(any changes)를 감시하고(watches), 변화가 생긴 후의 뷰의 정확한 상태를 표시한다.
+
+* Published 복습
+
+Observable Object는 데이터에 대한 모든 변화를 퍼블리싱할 필요가 있는데, 그렇게 해야 Subscriber들이 그 변화를 픽업할 수 있기 때문이다.
+
