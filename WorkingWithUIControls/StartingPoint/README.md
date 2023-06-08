@@ -194,7 +194,61 @@ Observable Object는 데이터에 대한 모든 변화를 퍼블리싱할 필요
 
 Binding Attribute를 사용하기 때문에, 뷰 내에서 만들어진 변경 내용들은 데이터 소스로 다시 전파된다.
 
+## Section 3 - 프로필 에디터 정의하기(Define the Profile Editor)
 
+유저 프로필 에디터는 주로 서로 다른 컨트롤들로 구성돼요. 이 컨트롤들은 프로필 내 각각의 세부 사항들을 변화시킵니다. 프로필 내 일부 항목들(ex. 여러 뱃지들)은 유저의 편집이 불가능해요. 그래서 이 항목들은 에디터 모드에서는 보일 필요가 없어요.
 
+프로필 요약과의 일관성을 위해, 프로필 세부 사항들을 편집 모드에서도 같은 순서로 추가해보죠. 
+
+The user profile editor consists primarily of different controls that change individual details in the profile. Some items in the profile, like the badges, aren’t user-editable, so they don’t appear in the editor.
+
+For consistency with the profile summary, you’ll add the profile details in the same order in the editor.
+
+### Step 1
+
+ProfileEditor라는 이름의 새로운 뷰를 생성하고 유저 프로필의 초안 사본에 대한 바인딩을 포함할게요.
+
+뷰의 첫 컨트롤은 텍스트 필드에요 얘는 문자열 바인딩을 컨트롤하고 업데이트 해요. 이 경우에는, 유저가 선택한 디스플레이 상에 표시되는 이름이에요. 텍스트 필드를 생성할 때 문자열과 바인딩과 레이블을 제공해 주세요.
+
+Create a new view named ProfileEditor and include a binding to the draft copy of the user’s profile.
+
+The first control in the view is a TextField, which controls and updates a string binding — in this case, the user’s chosen display name. You provide a label and a binding to a string when creating a text field.
+
+### Step 2
+
+ProfileHost 에 조건적인 컨텐츠(conditional content)를 업데이트해 프로필 에디터를 포함하고 프로필 바인딩에 따라 전달할게요.
+
+* 이제 편집 프로필 뷰를 Edit 를 탭할 때 표시합니다.
+
+Update the conditional content in ProfileHost to include the profile editor and pass along the profile binding.
+
+Now the edit profile view displays when you tap Edit.
+
+### Step 3
+
+랜드마크와 관련된 이벤트에 대한 알림을 수신하기 위한 유저의 preference 와 상응하는 토글을 추가해주세요.
+
+* 토글은 on 또는 off중 둘 중 하나인 컨트롤이에요. 그래서 토글은 yes 또는 no 에 대한 preference 와 같은 Boolean 값에 아주 어울리는 친구죠.
+
+Add a toggle that corresponds with the user’s preference for receiving notifications about landmark-related events.
+
+Toggles are controls that are either on or off, so they’re a good fit for Boolean values like a yes or no preference.
+
+### Step 4
+
+VStack 안에 레이블 피커 컨트롤을 위치시킬게요. 랜드마크 사진들이 선택 가능한 선호 계절을 가지게 만들어줄 수 있죠.
+
+Place a Picker control and its label in a VStack to make the landmark photos have a selectable preferred season.
+
+### Step 5
+
+마지막으로 DatePicker 를 계절 셀렉터 아래에 추가할게요. Landmark visitation goal date 를 수정가능하게 만들어 주는 친구에요.
+
+Finally, add a DatePicker below the season selector to make the landmark visitation goal date modifiable.
+
+### Section 3 학습
+
+* Toggle, Picker, DatePicker 사용법 학습
+* 바인딩 개념의 이해
 
 
