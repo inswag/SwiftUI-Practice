@@ -252,3 +252,69 @@ Finally, add a DatePicker below the season selector to make the landmark visitat
 * 바인딩 개념의 이해
 
 
+## Section 4 - 편집 전파를 딜레이하기 (Delay Edit Propagation)
+
+편집 모드를 유저가 종료한 후까지 편집 내용이 적용되지 않도록 편집하는 동안 프로필의 초안 사본을 사용하고, 유저가 편집을 확인한 경우에만 편집 초안을 진짜 사본에 할당해요.
+
+To make it so edits don’t take effect until after the user exits edit mode, you use the draft copy of their profile during editing, then assign the draft copy to the real copy only when the user confirms an edit.
+
+### Step 1
+
+취소 버튼을 ProfileHost 뷰에 추가할게요.
+
+EditButton이 제공하는 Done 버튼과는 달리, 취소 버튼은 클로저 내 진짜 프로필 데이터에 편집 내용을 적용하지 않아요.
+
+Add a cancel button to ProfileHost.
+
+Unlike the Done button that EditButton provides, the Cancel button doesn’t apply the edits to the real profile data in its closure.
+
+### Step 2
+
+opAppear(perform:) 과 onDisappear(perform:) modifier 를 적용해 편집기를 올바른 프로필 데이터로 채우고 유저가 Done 버튼을 누를 때 영구 프로필을 업데이트 할게요.
+
+* 다른 방법으로, 이전 값을 편집 모드가 활성화되었을 떄 나타나게 합니다.
+
+Apply the onAppear(perform:) and onDisappear(perform:) modifiers to populate the editor with the correct profile data and update the persistent profile when the user taps the Done button.
+
+Otherwise, the old values appear the next time edit mode activates.
+
+
+### Check Your Understanding 
+
+Q 1 of 3
+
+편집 상태에 변경이 발생했을 때 뷰를 어떻게 없데이트 할까요? 예를 들면 유저가 자신의 프로필을 편집한 후에 Done 버튼을 눌렀어요.
+
+A 1 of 3
+
+Number 2.
+이 코드는 environment 내에 저장된 편집 모드를 체크해요. Environment내에 편집 모드를 저장하는 것은 유저가 편집 모드에 들어가거나 종료할 떄 여러 뷰를 업데이트하는 것을 단순하게 만들어 줘요.
+
+Q 2 of 3
+
+accessibility(label:) modifier를 사용해 accessibility label 을 언제 추가할까요?
+
+A 2 of 3
+
+Number 1 (X) - 앱의 유저 인터페이스에서 뷰가 의미있는 부분일 때에만 오직 accessibility label 을 추가해야 해요. 항상 VoiceOver를 on 상태로 테스트하세요.
+
+Number 2 (O) - VoiceOver가 on 상태로 항상 앱을 테스트 해주세요. 그리고 앱의 뷰가 필요한 곳에 accessibility label들을 추가해주세요.
+
+Q 3 of 3
+
+Modal 과 non-modal view presentation 사이의 차이는 무엇인가요?
+
+A 3 of 3
+
+Number 2 - 뷰를 non-modally로 present 할 때, 목적 뷰는 source view를 cover하고 현재의 네비게이션 스택을 대체한다.
+(오답 해설) - 뷰를 non-modally로 present 할 때, SwiftUI는 목적 뷰를 네비게이션 스택에 추가해요.
+
+Number 3 - 뷰를 modally로 present 할 때, 목적 뷰는 source view를 커버하고 현재의 navigation stack을 대체한다.
+(정답) - 뷰를 modally로 present 합니다. 앱의 일반적인 플로우에서 벗어나고자 원할 때
+
+### Section 5 학습
+
+* accessibility(label:)에 대한 사용 시점에 대한 학습
+* 뷰를 non-modally 혹은 modally 하게 present 하는 경우 destination View 가 위치하는 지점에 대한 학습
+
+
