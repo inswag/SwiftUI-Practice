@@ -277,7 +277,62 @@ With the binding connected in both directions, the text view updates to show the
 * 바인딩 값을 넘길 시 $ 기호를 사용해야 함에 주의하자.
 
 
+## Section 4 - 커스텀 페이지 컨트롤 추가하기(Add a Custom Page Control)
 
+뷰에 SwiftUI UIViewRepresentable view에 래핑된 커스텀 UIPageControl을 추가할 준비가 됐어요. 
+
+You’re ready to add a custom UIPageControl to your view, wrapped in SwiftUI UIViewRepresentable view.
+
+### Step 1
+
+PageControl.swift 이름으로 새로운 SwiftUI View 파일을 생성해주세요. PageControl 타입을 UIViewRepresentable 프로토콜을  준수하도록 업데이트 해주세요.
+
+UIViewRepresentable과 UIViewControllerRepresentable 타입은 기본 UIKit 유형에 해당하는 메서드와 함께 같은 라이프 사이클을 가져요.
+
+Create a new SwiftUI view file, named PageControl.swift. Update the PageControl type to conform to the UIViewRepresentable protocol.
+
+UIViewRepresentable and UIViewControllerRepresentable types have the same life cycle, with methods that correspond to their underlying UIKit types.
+
+### Step 2
+
+
+레이아웃을 위해 VStack에서 ZStack으로 전환하여 텍스트 상자를 페이지 컨트롤로 대체할게요.
+
+페이지 카운트와 현재 페이지에 대한 바인딩을 전달해왔기 때문에 페이지 컨트롤은 이미 정확한 값을 보여줍니다.
+
+Replace the text box with the page control, switching from a VStack to a ZStack for layout.
+
+Because you’re passing the page count and the binding to the current page, the page control is already showing the correct values.
+
+* Before Next Step) 다음으로 페이지 컨트롤을 인터랙티브하게 만들고 유저가 한 사이드 또는 다른 사이드로 페이지 사이를 움직이기 위해 탭 할 수 있게 됩니다. (Next, make the page control interactive so users can tap one side or the other to move between pages.)
+
+### Step 3
+
+PageControl 내에 중첩된 Coordinator 타입을 생성해요 그리고 makeCoordinator() 메서드를 새로운 coordinator 를 생성하고 반환하기 위해 추가해 줄게요. 
+
+UIPageControl과 같은 UIControl의 서브클래스들은 delegation 대신 target-action 패턴을 사용하기 떄문에, 이 Coordinator는 @objc 메서드를 구현해 현재 페이지의 바인딩을 업데이트해요.
+
+Create a nested Coordinator type in PageControl, and add a makeCoordinator() method to create and return a new coordinator.
+
+Because UIControl subclasses like UIPageControl use the target-action pattern instead of delegation, this Coordinator implements an @objc method to update the current page binding.
+
+### Step 4
+
+실행하기 위한 액션 메서드인 updateCurrentPage(sender:)를 지정해 valueChanged 이벤트에 대한 타겟으로 coordinator를 추가하세요. 
+
+Add the coordinator as the target for the valueChanged event, specifying the updateCurrentPage(sender:) method as the action to perform.
+
+### Step 5
+
+마지막으로 CategoryHome에서 placeholder 주요 이미지를 새로운 페이지 뷰로 대체할게요.
+
+Finally, in CategoryHome, replace the placeholder feature image with the new page view.
+
+### Step 6
+
+이제 모든 서로 다른 인터랙션을 시도해보세요. PageView는 UIKit 과 SwiftUI 뷰들과 controller들이 어떻게 함께 작동하는지를 보여줍니다.
+
+Now try out all the different interactions — PageView shows how UIKit and SwiftUI views and controllers can work together.
 
 
 
