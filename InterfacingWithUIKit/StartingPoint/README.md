@@ -100,3 +100,154 @@ The preview fails because Xcode can’t infer a type for Page.
 필요한 뷰 배열을 전달해 preview provider 를 업데이트 해주세요. 그렇다면 preview가 작동하기 시작합니다.
 
 Update the preview provider to pass the required array of views, and the preview starts working.
+
+
+## Section 2 - 뷰 컨트롤러의 데이터 소스 생성하기(Create the View Controller’s Data Source)
+
+몇 단계을 거쳐오면서 많은 것을 했어요. PageViewController는 SwfitUI 뷰에서 컨텐츠를 보여주기 위한 UIPageViewController를 사용해요. 이제 페이지에서 페이지로 움직이기 위한 스와이핑 인터랙션을 가능하게 해볼게요.
+
+In a few short steps, you’ve done a lot — the PageViewController uses a UIPageViewController to show content from a SwiftUI view. Now it’s time to enable swiping interactions to move from page to page.
+
+Before Next Step) UIKit의 뷰 컨트롤러를 표시하는 SwiftUI 뷰는 SwiftUI가 관리하고 표현 가능한(representable) 뷰 컨텍스트의 일부로 제공하는 Coordinator 타입을 정의할 수 있어요. (A SwiftUI view that represents a UIKit view controller can define a Coordinator type that SwiftUI manages and provides as part of the representable view’s context.)
+
+### Step 1
+
+중첩된 Coordinator 클래스를 PageViewController 내에 선언할게요.
+
+* SwiftUI는 UIViewControllerRepresentable 타입의 coordinator 를 관리하고 그것을 위에서 생성했던 메서드들을 호출할 때 컨텍스트의 일부로 제공합니다.
+
+Declare a nested Coordinator class inside PageViewController.
+
+SwiftUI manages your UIViewControllerRepresentable type’s coordinator, and provides it as part of the context when calling the methods you created above.
+
+### Step 2
+
+coordinator를 만들기 위해 PageViewController에 또 다른 메서드를 다음과 같이 추가할게요.
+
+* SwiftUI는 이 makeCoordinator() 메서드를 makeUIViewController(context:) 전에 호출해요, 그렇기 때문에 우리는 뷰 컨트롤러를 구성할 때 coordinator 객체(object)에 접근할 수 있어요.
+
+Add another method to PageViewController to make the coordinator.
+
+SwiftUI calls this makeCoordinator() method before makeUIViewController(context:), so that you have access to the coordinator object when configuring your view controller.
+
+* Tip) delegates, data sources, target-action을 통한 유저 이벤트에 응답하기와 같은 일반적인 Cocoa 패턴을 구현하기 위해 이 coordinator를 사용할 수 있어요.
+
+Tip) You can use this coordinator to implement common Cocoa patterns, such as delegates, data sources, and responding to user events via target-action.
+
+### Step 3
+
+Pages 뷰 배열을 사용해 Coordinator 내 'controllers' 배열을 초기화 해주세요. 
+
+* Coordinator는 이 controllers 를 저장하기에 좋은 장소에요. 왜냐하면 시스템은 이 컨트롤러들을 오직 한 번만 초기화하고 뷰 컨트롤러를 업데이트하기 전에 필요하기 전에 초기화하기 때문입니다.
+
+Initialize an array of controllers in the coordinator using the pages array of views.
+
+The coordinator is a good place to store these controllers, because the system initializes them only once, and before you need them to update the view controller.
+
+### Step 4
+
+UIPageViewControllerDataSource 를 Coordinator 타입이 채택하도록 추가하고 두 개의 요구되는 메서드들을 구현할게요.
+
+* 이 두 메서드는 뷰 컨트롤러 사이의 관계를 확립해요. 그렇게 해서 뷰 컨트롤러 사이를 앞으로 뒤로 스와이프 할 수 있어요.
+
+Add UIPageViewControllerDataSource conformance to the Coordinator type, and implement the two required methods.
+
+These two methods establish the relationships between view controllers, so that you can swipe back and forth between them.
+
+### Step 5
+
+UIPageViewController의 데이터 소스로 coordinator를 추가할게요.
+
+Add the coordinator as the data source of the UIPageViewController.
+
+### Step 6
+
+PageView로 돌아와 라이브 프리뷰를 켜고 스와이프 인터랙션을 테스트 해보세요.
+
+Return to PageView, turn on live previews, and test out the swipe interactions.
+
+
+## Section 1,2 특이점 정리
+
+### Section 1
+* struct PageViewController 
+1. <Page: View>
+2. UIViewControllerRepresentable
+3. makeUIViewController(context:) 
+4. updateUIViewController(_:context:)
+
+* struct PageView
+1. <Page: View>
+2. Body 내 PageViewController
+
+
+### Section 2
+* struct PageViewController
+1. class Coordinator: NSObject 를 내부에서 선언
+3. makeCoordinator() -> Coordinator 메서드
+
+* class Coordinator: NSObject
+1. 변수로 parent: PageViewController 와 controllers: [UIViewController] = [] 를 변수로 가짐
+2. Parents와 Controllers는 Init 시 값을 전달받음
+3. UIPageViewControllerDataSource
+
+- UIPageViewControllerDataSource : @Required method 구현
+1. pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController?
+2. pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController?
+
+* struct PageViewController
+1. makeUIViewController(context: Context) -> UIPageViewController 메서드 내에서 pageViewController 인스턴스 생성 시 pageViewController의 dataSource 로 context.coordinator 주입
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
