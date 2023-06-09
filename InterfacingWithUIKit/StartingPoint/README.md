@@ -200,11 +200,81 @@ Return to PageView, turn on live previews, and test out the swipe interactions.
 
 
 
+## Section 3 - SwiftUI 뷰의 State 내에서 Page를 트래킹하기(Track the Page in a SwiftUI View’s State)
+
+커스텀 UIPageControl을 추가하려고 준비하기 위해, PageView 내부로부터 현재의 페이지를 트래킹하기위한 방법이 필요해요.
+
+이를 하기 위해 PageView내 @State 프로퍼티를 선언하고 이 프로퍼티에 대한 바인딩을 PageViewController 뷰로 전달할게요. PageViewController는 보이는 페이지와 일치하도록 바인딩을 업데이트해요.
+
+To prepare for adding a custom UIPageControl, you need a way to track the current page from within PageView.
+
+To do this, you’ll declare a @State property in PageView, and pass a binding to this property down to the PageViewController view. The PageViewController updates the binding to match the visible page.
+
+### Step 1
+
+PageViewController의 프로퍼티로 currentPage라는 바인딩을 추가하는 것으로 시작할게요.
+
+* @Binding 프로퍼티를 선언하는 것 이외에도, 또한 setViewControllers(_:direction:animated:)의 호출을 업데이트하여 currentPage 바인딩 값을 전달합니다.
+
+Start by adding a currentPage binding as a property of PageViewController.
+
+In addition to declaring the @Binding property, you also update the call to setViewControllers(_:direction:animated:), passing the value of the currentPage binding.
+
+### Step 2
+
+PageView에 @State 변수 currentPage 를 선언하세요 그리고 자식 PageViewController를 생성할 때 프로퍼티에 바인딩을 전달하세요.
+
+* 중요) $ 문법을 사용하는 것을 기억하세요 state로서 저장된 값에 대한 바인딩을 생성하기 위해서는 꼭!!
+
+Declare the @State variable in PageView, and pass a binding to the property when creating the child PageViewController.
+
+Important) Remember to use the $ syntax to create a binding to a value that is stored as state.
+
+### Step 3
+
+currentPage의 초기 값을 변경해 PageViewController에 대한 바인딩을 통해 값의 흐름을 테스트해보세요.
+
+실험) PageView에 Page ViewController 에서 두번째 뷰로 점프하게 만들어주는 버튼을 추가해보세요.
+
+Test that the value flows through the binding to the PageViewController by changing its initial value.
+
+Experiment) Add a button to PageView that makes the page view controller jump to the second view.
+
+### Step 4
+
+currentPage 프로퍼티와 함께 텍스트 뷰를 추가해주세요. 그렇게 된다면 @State 프로퍼티의 값을 계속해서 지켜볼 수 있어요.
+
+페이지에서 페이지로 스와이프 할 때 값이 변하지 않는 것을 관찰해보세요.
+
+Add a text view with the currentPage property, so that you can keep an eye on the @State property’s value.
+
+Observe that when you swipe from page to page, the value doesn’t change.
+
+### Step 5
+
+PageViewController.swift에서 Coordinator가 UIPageViewControllerDelegate를 준수하도록 하고 그리고 pageViewController(_:didFinishAnimating:previousViewControllers:transitionCompleted completed: Bool) 메서드를 추가해주세요.
+
+SwiftUI가 이 메서드를 페이지 스위칭 애니메이션이 완료될 때마다 호출하기 떄문에, 현재 뷰 컨트롤러의 인텍스를 찾고 바인딩을 업데이트 할 수 있어요.
+
+In PageViewController.swift, conform the coordinator to UIPageViewControllerDelegate, and add the pageViewController(_:didFinishAnimating:previousViewControllers:transitionCompleted completed: Bool) method.
+
+Because SwiftUI calls this method whenever a page switching animation completes, you can find the index of the current view controller and update the binding.
+
+### Step 6
+
+데이터 소스 이외에도, Coordinator를 UIPageViewController에 delegate로 할당해주세요.
+
+바인딩이 양방향으로 연결된 경우 텍스트 뷰는 업데이트되어 각 스와이프 후 정확한 페이지 번호가 표시돼요.
+
+Assign the coordinator as the delegate for the UIPageViewController, in addition to the data source.
+
+With the binding connected in both directions, the text view updates to show the correct page number after each swipe.
 
 
+### Section 3 정리
 
-
-
+* 뷰 컨트롤러의 트랜지션에 대한 핸들링을 하기 위해서는 UIPageViewControllerDelegate를 채택하고 pageViewController(_:didFinishAnimating:previousViewControllers:transitionCompleted completed: Bool) 메서드의 내부를 구현한다.
+* 바인딩 값을 넘길 시 $ 기호를 사용해야 함에 주의하자.
 
 
 
