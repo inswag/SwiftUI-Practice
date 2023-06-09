@@ -20,12 +20,13 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
         return pageViewController
     }
     
-    // @Required UIViewControllerRepresentable
+    // Tutorial Version - Error isn't resolved
 //    func updateUIViewController(_ pageViewController: UIPageViewController, context: Context) {
 //        pageViewController.setViewControllers(
 //                    [UIHostingController(rootView: pages[0])], direction: .forward, animated: true)
 //    }
     
+    // Modified Version (@Required UIViewControllerRepresentable)
     func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
 //        uiViewController.setVi
         guard let pageViewController = uiViewController as? UIPageViewController else { return }
@@ -33,6 +34,5 @@ struct PageViewController<Page: View>: UIViewControllerRepresentable {
             [UIHostingController(rootView: pages[0])], direction: .forward, animated: true)
         
     }
-    
     
 }
