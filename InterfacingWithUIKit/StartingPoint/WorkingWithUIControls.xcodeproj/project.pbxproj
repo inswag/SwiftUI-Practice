@@ -42,6 +42,7 @@
 		E693ADD52A31EF5000574A1D /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693ADD42A31EF5000574A1D /* PageViewController.swift */; };
 		E693ADD72A31FB3900574A1D /* FeatureCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693ADD62A31FB3900574A1D /* FeatureCard.swift */; };
 		E693ADD92A31FDE800574A1D /* PageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693ADD82A31FDE800574A1D /* PageView.swift */; };
+		E693ADDB2A35952B00574A1D /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E693ADDA2A35952B00574A1D /* PageControl.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +86,7 @@
 		E693ADD42A31EF5000574A1D /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		E693ADD62A31FB3900574A1D /* FeatureCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureCard.swift; sourceTree = "<group>"; };
 		E693ADD82A31FDE800574A1D /* PageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageView.swift; sourceTree = "<group>"; };
+		E693ADDA2A35952B00574A1D /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +262,7 @@
 				E693ADD42A31EF5000574A1D /* PageViewController.swift */,
 				E693ADD62A31FB3900574A1D /* FeatureCard.swift */,
 				E693ADD82A31FDE800574A1D /* PageView.swift */,
+				E693ADDA2A35952B00574A1D /* PageControl.swift */,
 			);
 			path = PageView;
 			sourceTree = "<group>";
@@ -346,6 +349,7 @@
 				C20D780524B684EC002E7AEA /* ModelData.swift in Sources */,
 				C20D781224B6A3E7002E7AEA /* Badge.swift in Sources */,
 				C20D77F024B665D7002E7AEA /* LandmarkDetail.swift in Sources */,
+				E693ADDB2A35952B00574A1D /* PageControl.swift in Sources */,
 				C20D77FF24B67FB3002E7AEA /* MapView.swift in Sources */,
 				C20D781824B6C5F6002E7AEA /* RotatedBadgeSymbol.swift in Sources */,
 				C2FEB34124B7CEE0004FAB73 /* HikeBadge.swift in Sources */,

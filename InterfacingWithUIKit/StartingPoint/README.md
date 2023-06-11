@@ -295,7 +295,6 @@ UIViewRepresentable and UIViewControllerRepresentable types have the same life c
 
 ### Step 2
 
-
 레이아웃을 위해 VStack에서 ZStack으로 전환하여 텍스트 상자를 페이지 컨트롤로 대체할게요.
 
 페이지 카운트와 현재 페이지에 대한 바인딩을 전달해왔기 때문에 페이지 컨트롤은 이미 정확한 값을 보여줍니다.
@@ -310,7 +309,7 @@ Because you’re passing the page count and the binding to the current page, the
 
 PageControl 내에 중첩된 Coordinator 타입을 생성해요 그리고 makeCoordinator() 메서드를 새로운 coordinator 를 생성하고 반환하기 위해 추가해 줄게요. 
 
-UIPageControl과 같은 UIControl의 서브클래스들은 delegation 대신 target-action 패턴을 사용하기 떄문에, 이 Coordinator는 @objc 메서드를 구현해 현재 페이지의 바인딩을 업데이트해요.
+* UIPageControl과 같은 UIControl의 서브클래스들은 delegation 대신 target-action 패턴을 사용하기 떄문에, 이 Coordinator는 @objc 메서드를 구현해 현재 페이지의 바인딩을 업데이트해요.
 
 Create a nested Coordinator type in PageControl, and add a makeCoordinator() method to create and return a new coordinator.
 
@@ -333,6 +332,57 @@ Finally, in CategoryHome, replace the placeholder feature image with the new pag
 이제 모든 서로 다른 인터랙션을 시도해보세요. PageView는 UIKit 과 SwiftUI 뷰들과 controller들이 어떻게 함께 작동하는지를 보여줍니다.
 
 Now try out all the different interactions — PageView shows how UIKit and SwiftUI views and controllers can work together.
+
+### Section 4 학습 포인트
+
+* UIViewRepresentable과 UIViewControllerRepresentable 타입은 기본 UIKit 유형에 해당하는 메서드와 함께 같은 라이프 사이클을 가진다.
+* UIPageControl과 같은 UIControl의 서브클래스들은 delegation 대신 target-action 패턴을 사용하기 떄문에, 이 Coordinator는 @objc 메서드를 구현해 현재 페이지의 바인딩을 업데이트 한다.
+
+### Section 5 - Check Your Understanding
+
+Q 1 of 2
+
+UIKit View Controllers를 SwiftUI 내부로 브릿징하기 위해서는 어떤 프로토콜을 사용해야 하나요?
+
+N1 - UIViewRepresentable
+N2 - UIHostingController
+N3 - UIViewControllerRepresentable
+
+A 1 of 2
+
+N3 - UIViewControllerRepresentable
+설명) UiViewControllerRepresentable 을 채택한 구조체를 생성하고 SwfitUI 뷰 계층 안에 UIViewController를 포함하기 위한 프로토콜 필수 요구조건들을 구현해주세요.
+
+Q 2 of 2
+
+어떤 메서드로 UIViewControllerRepresentable 타입을 위한 delegate나 data source 를 생성하나요?
+
+N1 - UIViewController를 만드는 동일한 makeUIViewController(context:) 메서드에서 일 것 같아요, delegate 또는 data source를 사용하기 때문입니다.
+N2 - UiViewControllerRepresentable 타입에 대한 이니셜라이저 안에서 일 것 같아요
+N3 - makeCoordinator() 메서드 내에서 일 것 같아요
+
+A 2 of 2
+
+N3 - In the makeCoordinator() method.
+설명) makeCoordinator() 메서드로부터 coordinator 타입의 인스턴스를 반환해요. SwiftUI는 인스턴스의 라이플 사이클을 관리하고 다른 필요한 메서드 내에서 context 파라미터의 일부로 인스턴스를 제공해요.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
