@@ -137,10 +137,88 @@ When creating a SwiftUI view, you describe its content, layout, and behavior in 
 이번 섹션에서 vertical stack 을 사용해서 title을 공원에 대한 세부 내용을 포함하고 있는 horizontal stack위에 위치시켜볼게요. 
 In this section, you’ll use a vertical stack to place the title above a horizontal stack that contains details about the park.
 
+Before Next Step) 
+뷰를 컨테이너 뷰로 임베딩하거나 인스펙터를 열거나 다르 유용한 변경사항들을 돕기 위해 Xcode의 구조화된 편집 서포트를 사용할 수 있어요.
+You can use Xcode’s structured editing support to embed a view in a container view, open an inspector, or help with other useful changes.
+
+### Step 1
+
+텍스트 뷰의 이니셜라이저를 구조화된 팝업 편집기를 보여주기 위해 Command-Click 하고 "Embed in VStack" 을 선택해주세요.
+Command-click the text view’s initializer to show the structured editing popover, and then choose “Embed in VStack”.
+
+Before Next Step)
+다음으로, 텍스트 뷰를 스택에 추가하기 위해 라이브러리로부터 텍스트 뷰를 드래깅해주세요.
+Next, you’ll add a text view to the stack by dragging a Text view from the library.
+
+### Step 2
+
+Xcode의 오른쪽 상단의 + 버튼을 클릭해서 라이브러리를 연 다음, Text 뷰를 "Turtle Rock" 텍스트 뷰 바로 아래로 드래깅 해주세요.
+Open the library by clicking the plus button (+) at the top-right of the Xcode window, and then drag a Text view to the place in your code immediately below the “Turtle Rock” text view.
+
+### Step 3
+
+Placeholder 텍스트를 "Joshua Tree National Park" 로 변경해주세요.
+Replace the Text view’s placeholder text with “Joshua Tree National Park”.
+
+Before next) 원하는 레이아웃과 매칭시키기 위해 위치를 커스터마이징 하겠습니다.
+Customize the location to match the desired layout.
+
+### Step 4
+
+위치의 폰트를 'subheadline' 으로 설정하세요.
+Set the location’s font to subheadline.
+
+### Step 5
+
+Leading edge로 뷰를 정렬하기 위해 VStack 이니셜라이저를 편집하세요. (.leading 을 적용할 경우 글자가 모두 왼쪽을 기준으로 정렬이 되었음을 확인할 수 있어요)
+Edit the VStack initializer to align the views by their leading edges.
+
+* 기본적으로 스택은 자신의 컨텐츠를 자신의 축에 따라 중심화하고 문맥에 맞는 공간을 제공합니다.
+By default, stacks center their contents along their axis and provide context-appropriate spacing.
+
+다음은 공원이 속한 주를 표시하는 텍스트 뷰를 위치의 오른쪽에 추가해볼게요.
+Next, you’ll add another text view to the right of the location, this for the park’s state.
+
+### Step 6
+
+캔버스에서 Joshua 텍스트 부분을 Command-click  해서 "Embed in HStack" 을 선택하세요.
+In the canvas, Command-click “Joshua Tree National Park”, and choose “Embed in HStack”.
+
+### Step 7
+
+위치 다음에 새로운 텍스트 뷰를 추가할게요. Placeholder 텍스트를 공원이 속한 주로 변경하고 폰트를 "subheadline" 으로 설정합니다.
+Add a new text view after the location, change the placeholder text to the park’s state, and then set its font to subheadline.
+
+### Step 8
+
+기기의 꽉 찬 너비를 사용을 위한 레이아웃에 이르기 위해, 공원과 주를 Spacer 를 추가해서 분리할게요. 이 Spacer 친구는 두 텍스트 뷰를 홀딩하고 있는 HStack 에 적용해요.
+To direct the layout to use the full width of the device, separate the park and the state by adding a Spacer to the horizontal stack holding the two text views.
+
+* Spacer는 오직 자신의 컨텐츠에 의해 정의되는 고유 사이즈를 가지는 대신, 포함하고 있는 뷰가 자신의 부모 뷰의 모든 공간을 사용하도록 확장하는 역할을 한다. 
+A spacer expands to make its containing view use all of the space of its parent view, instead of having its size defined only by its contents.
+
+### Step 9
+
+마지막으로 padding() modifier 메서드를 사용해 랜드마크의 이름과 세부 내용에 약간의 더 만흔 공간을 주도록 합니다.
+Finally, use the padding() modifier method to give the landmark’s name and details a little more space.
+
+### Section 3 학습
+
+* VStack, HStack 을 추가하고 사용 하는 방법 학습
+* Spacer(), padding() 의 역할 학습
+
+
+
 
 
 ### Creating and Combining Views 정리
 
 * SwiftUI를 사용하면 App 프로토콜을 준수하는 구조체가 '앱이름App.swift' 이름으로 생성되는데 @main 으로 되어있는 걸 보니 여기가 앱의 엔트리 포인트가 된다. UIKit의 AppDelegate 느낌?
+
 * 기본적으로 SwiftUI view 파일들은 두 개의 구조체를 선언. 첫 번째는 View 프로토콜을 준수하고 있고 뷰의 콘텐츠와 레이아웃을 설명. 두 번째 구조체는 그 뷰에 대한 프리뷰를 선언
+
 * SwfitUI 에서는 modifier를 추가, 제거, 편집할 때 프리뷰에서도, 코드에서도 Command-Click 을 통해 인스펙터를 불러 쉽게 수정할 수 있다. 이떄 수정 시 자동으로 코드가 생성,수정,삭제 된다.
+
+* 스택은 기본적으로 자신의 컨텐츠를 자신의 축(V,H,Z)에 따라 중심화하고 문맥에 맞는 공간을 제공한다.
+
+* Spacer() 메서드는 오직 자신의 컨텐츠에 의해서만 정의되는 고유 사이즈를 가지는 것이 아닌, 포함하고 있는 뷰가 자신의 부모 뷰의 모든 공간을 사용하도록 확장하는 역할을 한다.
