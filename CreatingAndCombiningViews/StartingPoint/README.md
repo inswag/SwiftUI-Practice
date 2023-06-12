@@ -207,8 +207,66 @@ Finally, use the padding() modifier method to give the landmark’s name and det
 * VStack, HStack 을 추가하고 사용 하는 방법 학습
 * Spacer(), padding() 의 역할 학습
 
+## Section 4 - 커스텀 이미지 뷰 생성하기(Create a Custom Image View)
 
+이름과 위치 뷰를 모두 세팅했고 다음 단계는 랜드마크 이미지를 추가할거에요.
+With the name and location views all set, the next step is to add an image for the landmark.
 
+파일에 더 코드를 추가하는 대신, mask, border, drop show를 이미지에 적용하는 커스텀 뷰를 만들어볼게요.
+Instead of adding more code in this file, you’ll create a custom view that applies a mask, border, and drop shadow to the image.
+
+Before Next) 프로젝트 에셋 카탈로그에 이미지를 추가할게요.
+Start by adding an image to the project’s asset catalog.
+
+### Step 1
+
+프로젝트 파일의 Resources 폴더에 'turtlerock@2x.jpg' 파일을 찾아 asset catalog editor에 드래그 해주세요. Xcode는 이미지에 대한 새로운 이미지 셋을 생성합니다.
+Find turtlerock@2x.jpg in the project files’ Resources folder; drag it into the asset catalog’s editor. Xcode creates a new image set for the image.
+
+Before Next) 다음은 새로운 SwiftUI view 를 커스텀 이미지 뷰를 위해 만들어볼게요.
+Next, you’ll create a new SwiftUI view for your custom image view.
+
+### Step 2
+
+"File > New > File" 을 선택해 template selector 를 다시 엽니다. User Inferface 섹션에서 "SwiftUI View" 를 선택하고 Next 를 클릭해주세요.  이름은 CircleImage 로 주고 Create 를 클릭합니다.
+Choose File > New > File to open the template selector again. In the User Interface section, select “SwiftUI View” and click Next. Name the file CircleImage.swift and click Create.
+
+Before Next) 이미지를 삽입하고 원하는 디자인에 매칭시키기 위해 이미지를 수정항 준비가 되었어요.
+You’re ready to insert the image and modify its display to match the desired design.
+
+### Step 3
+
+텍스트 뷰를 Image(_:) 이니셜라이저를 사용하여 Turtle Rock 이미지로 대체합니다. 이미지를 표시하기 위한 이름을 전달해주세요.
+Replace the text view with the image of Turtle Rock by using the Image(_:) initializer, passing it the name of the image to display.
+
+### Step 4
+
+이미지에 원형의 clipping shape 를 적용하기 위해 "clipShape(Circle())" 을 호출할게요.
+Add a call to clipShape(Circle()) to apply the circular clipping shape to the image.
+
+* Circle 타입은 하나의 모양(shape) 인데 mask를 사용할 수 있거나 원형에 stroke 나 fill 을 지정하여 뷰로 사용할 수 있어요.
+The Circle type is a shape that you can use as a mask, or as a view by giving the circle a stroke or fill.
+
+### Step 5
+
+회색 스트로크를 가진 또 다른 원을 생성하고 이미지에 외곽선을 주기 위한 오버레이로 이 원을 추가할게요.
+Create another circle with a gray stroke, and then add it as an overlay to give the image a border.
+
+### Step 6
+
+7 포인트의 radius 를 가진 shadow 를 추가할게요.
+Next, add a shadow with a 7 point radius.
+
+### Step 7
+
+외곽선 색을 하얀색으로 바꿔주세요.
+Switch the border color to white.
+
+* 이것으로 이미지 뷰가 완성되었어요.
+This completes the image view.
+
+### Section 4 학습
+* 이미지에 clipping, overlay, shadow 를 적용해 커스텀 이미지 뷰를 만드는 방법을 학습
 
 
 ### Creating and Combining Views 정리
