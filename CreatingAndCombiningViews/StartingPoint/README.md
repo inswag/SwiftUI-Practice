@@ -268,8 +268,164 @@ This completes the image view.
 ### Section 4 학습
 * 이미지에 clipping, overlay, shadow 를 적용해 커스텀 이미지 뷰를 만드는 방법을 학습
 
+## Section 5 - 다른 프레임워크로부터 SwiftUI View 사용하기(Use SwiftUI Views From Other Frameworks)
 
-### Creating and Combining Views 정리
+다음은 주어진 좌표를 중심으로 보여주는 지도를 생성해볼게요. Map view를 MapKit으로 부터 사용해 지도를 렌더링 해볼게요.
+Next you’ll create a map that centers on a given coordinate. You can use the Map view from MapKit to render the map.
+
+Before Next) 시작하기 위해 지도를 관리할 새로운 커스텀 뷰를 만들게요.
+To get started, you’ll create a new custom view to manage your map.
+
+### Step 1
+
+"File > New > File" 을 선택하고 iOS 플랫폼을 선택, "SwiftUI View" 템플릿을 선택, Next를 클릭하세요. MapView.swift 이름으로 Create 를 클릭하세요.
+Choose File > New > File, select iOS as the platform, select the “SwiftUI View” template, and click Next. Name the new file MapView.swift and click Create.
+
+### Step 2
+
+import MapKit 을 상단에 추가하세요.
+Add an import statement for MapKit.
+
+같은 파일 안에 정해진 다른 프레임워크와 SwiftUI를 임포트 할 때, 프레임워크에 의해 제공되는 SwiftUI의 특정 기능에 접근할 권한을 얻게 돼요. 
+When you import SwiftUI and certain other frameworks in the same file, you gain access to SwiftUI-specific functionality provided by that framework.
+
+### Step 3
+
+지도에 대한 지역 정보를 가지고 있는 Private state 변수를 생성하세요.
+Create a private state variable that holds the region information for the map.
+
+* @State 어트리뷰트를 사용해 둘 이상의 뷰로부터 수정할 수 있는 앱의 데이터에 대한 신뢰할 수 있는 소스(source of truth)를 설정해요. SwiftUI는 기본 스토리지를 관리하고 값에 따라 자동적으로 뷰를 업데이트해요.
+You use the @State attribute to establish a source of truth for data in your app that you can modify from more than one view. SwiftUI manages the underlying storage and automatically updates views that depend on the value.
+
+### Step 4
+
+기본 텍스트 뷰를 지역에 대한 바인딩을 가지는 맵 뷰로 대체합니다. 
+Replace the default Text view with a Map view that takes a binding to the region.
+
+* state 변수 앞에 $를 붙임으로서, 바인딩을 전달합니다. 바인딩은 근원적인(underlying) 값에 대한 참조(reference)와 같은 개념이에요. 예를 들면, 유저가 지도와 성호작용할 때 맵은 현재 유저 인터페이스에서 나타나는 지도의 부분과 매칭시키기 위해 지역 값을 업데이트해요.  
+By prefixing a state variable with $, you pass a binding, which is like a reference to the underlying value. When the user interacts with the map, the map updates the region value to match the part of the map that’s currently visible in the user interface.
+
+Before Next)
+프리뷰가 정적 모드일 때, 프리뷰는 오직 네이티브 SwiftUI Views를 꽉 차게 렌더링합니다. Map View에 대해선, 렌더되는 것을 보기 위해 라이브 프리뷰로 스위칭할 필요가 있어요.
+
+When previews are in static mode, they only fully render native SwiftUI views. For the Map view, you’ll need to switch to a live preview to see it render.
+
+### Step 5
+
+[의역] 라이브 프리뷰를 라이브 모드로 전한하면 Turtle Rock 중심에 지도가 보일거에요. 주변을 둘러보세요~
+Click Live Preview to switch the preview to live mode. You might need to click Try Again or Resume above your preview.
+
+In a moment, you’ll see a map centered on Turtle Rock. You can manipulate the map in live preview to zoom out a bit and see the surrounding area.
+
+### Section 5 학습
+* State 의 개념
+* Binding 의 개념
+
+## Section 6 - Detail View 구성하기(Compose the Detail View)
+
+이제 필요한 모든 컴포넌트들을 모아볼게요. 이름과 장소, 원형 이미지, 위치를 표시할 지도가 있네요.
+You now have all of the components you need — the name and place, a circular image, and a map for the location.
+
+지금까지 사용한 도구들로 만들어온 커스텀 뷰들을 합해 랜드마크 디테일 뷰를 위한 마지막 디자인을 만들어볼게요.
+With the tools you’ve used so far, combine your custom views to create the final design for the landmark detail view.
+
+### Step 1
+
+프로젝트 네비게이터에서 ContentView.swift 파일을 선택하세요.
+In the Project navigator, select the ContentView.swift file.
+
+### Step 2
+
+또 다른 VStack 안에 3개의 텍스트 뷰를 홀딩하는 VStack을 임베딩해주세요.
+Embed the VStack that holds the three text views in another VStack.
+
+### Step 3
+
+커스탬 MapView를 스택의 상단에 추가해주세요. frame(width:height:)로 MapView의 사이즈를 설정합니다.
+Add your custom MapView to the top of the stack. Set the size of the MapView with frame(width:height:).
+
+* Height 파라미터만 특정했을 때는 뷰는 자동적으로 컨텐츠의 너비에 맞춰 사이징합니다. 이 경우에는 MapView는 이용가능한 공간을 채우기 위해 확장됩니다.
+When you specify only the height parameter, the view automatically sizes to the width of its content. In this case, MapView expands to fill the available space.
+
+### Step 4
+
+라이브 프리뷰를 클릭해 구성된 뷰에 렌더링 된 지도를 확인해보세요.
+Click Live Preview to see the rendered map in the composed view.
+
+라이브 프리뷰를 보는 동안에도 뷰 편집을 계속할 수 있어요.
+You can continue editing the view while showing a Live Preview.
+
+### Step 5
+
+Stack에 CircleImage 뷰를 추가해요.
+Add the CircleImage view to the stack.
+
+### Step 6
+
+맵 뷰의 상단에 이미지 뷰를 레이어 처리하기 위해 이미지에 오프셋 -130 포인트를 수직으로 부여하고 -130 포인트의 패딩을 뷰의 아래에 부여합니다. 
+To layer the image view on top of the map view, give the image an offset of -130 points vertically, and padding of -130 points from the bottom of the view.
+
+이 조정은 이미지가 위쪽으로 움직임으로서 텍스트를 위한 공간을 만들어줍니다.
+These adjustments make room for the text by moving the image upwards.
+
+### Step 7
+
+Spacer 를 VStack 바깥 아래에 추가해 스크린의 상단으로 컨텐츠를 밀어냅니다.
+Add a spacer at the bottom of the outer VStack to push the content to the top of the screen.
+
+### Step 8
+
+스크린의 상단 가장자리로 확장하려는 지도 컨텐츠를 허용하기 위해, ignoresSafeArea(edges: .top) modifier를 맵뷰에 추가할게요.
+To allow the map content to extend to the top edge of the screen, add the ignoresSafeArea(edges: .top) modifier to the map view.
+
+### Step 9
+
+Divider 와 랜드마크에 대한 약간의 추가적인 설명 텍스트를 추가합니다.
+Add a divider and some additional descriptive text for the landmark.
+
+### Step 10
+
+마지막으로 'subheadline' 폰트 modifier 를 각각의 텍스트 뷰로부터 텍스트들을 포함하는 HStack 으로 옮겨주세요 그리고 subheadline 텍스트에 세컨더리 컬러를 적용합니다. 
+Finally, move the subheadline font modifier from each Text view to the HStack containing them, and apply the secondary color to the subheadline text.
+
+스택과 같은 레이아웃 뷰에 modifier를 적용할 때, SwiftUI는 그룹 내 포함된 모든 요소에 modifier를 적용합니다.
+When you apply a modifier to a layout view like a stack, SwiftUI applies the modifier to all the elements contained in the group.
+
+### Section 6 학습
+
+* View 크기를 지정할 때 Height 값만 부여한 경우 가로 길이는 가능한 공간에 가득 차도록 조정된다.
+
+### Check Your Understanding
+
+Q 1 of 4
+커스텀 SwiftUI view를 생성할 때, 뷰의 레이아웃을 어디에 선언해야 하나요?
+
+N1) 뷰의 이니셜라이저
+N2) body 프로퍼티
+N3) layoutSubviews() 메서드
+
+A 1 of 4
+N2) 설명 - 커스텀 뷰는 body property를 구현하며, 이 프로퍼티는 View protocol이 필요조건이다.
+
+Q 2 of 4
+어떤 레이아웃이 다음의 뷰 코드를 렌더링하나요?
+
+A 2 of 4
+N3
+
+Q 3 of 4
+보기 중 어떤 것이 커스텀 뷰의 body 프로퍼티로부터 3개의 뷰를 반환하는 정확한 방법인가요?
+
+A 3 of 4
+N1
+
+Q 4 of 4
+뷰를 구성하기 위한 modifier 메서드를 사용하는 정확한 방법은 무엇인가요?
+
+A 4 of 4
+N3
+
+## Creating and Combining Views 정리
 
 * SwiftUI를 사용하면 App 프로토콜을 준수하는 구조체가 '앱이름App.swift' 이름으로 생성되는데 @main 으로 되어있는 걸 보니 여기가 앱의 엔트리 포인트가 된다. UIKit의 AppDelegate 느낌?
 
@@ -280,3 +436,5 @@ This completes the image view.
 * 스택은 기본적으로 자신의 컨텐츠를 자신의 축(V,H,Z)에 따라 중심화하고 문맥에 맞는 공간을 제공한다.
 
 * Spacer() 메서드는 오직 자신의 컨텐츠에 의해서만 정의되는 고유 사이즈를 가지는 것이 아닌, 포함하고 있는 뷰가 자신의 부모 뷰의 모든 공간을 사용하도록 확장하는 역할을 한다.
+
+* @State 어트리뷰트를 사용하면 둘 이상의 뷰로부터 수정할 수 있는 앱의 데이터에 대한 신뢰할 수 있는 소스(source of truth)를 설정한다. SwiftUI는 기본 스토리지를 관리하고 값에 따라 자동적으로 뷰를 업데이트해요.
