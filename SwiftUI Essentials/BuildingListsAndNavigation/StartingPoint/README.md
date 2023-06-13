@@ -216,7 +216,77 @@ The code you write in a preview provider only changes what Xcode displays in the
 
 * Group 은 뷰 컨텐츠를 그룹핑하는 하나의 컨테이너이다. Xcode는 그룹의 자식 뷰들을 Canvas 내 분리된 프리뷰로 렌더링합니다.
 
+## Section 4 - 랜드마크 리스트 생성하기
+
+SwiftUI의 'List' 타입을 사용할 때, 플랫폼에 특정된 뷰 리스트를 표시할 수 있어요. 리스트의 요소들은 지금까지 만들어온 Stack 의 자식 뷰들과 같이 정적(static)이거나 동적으로 생성됩니다. 정적과 동적 생성 뷰들을 믹스할 수도 있어요. 
+When you use SwiftUI’s List type, you can display a platform-specific list of views. The elements of the list can be static, like the child views of the stacks you’ve created so far, or dynamically generated. You can even mix static and dynamically generated views.
+
+### Step 1
+
+Views 그룹 내에 새로운 SwiftUI view 를 LandmarkList.swift 이름으로 생성합니다.
+Create a new SwiftUI view in the Views group named LandmarkList.swift.
+
+### Step 2
+
+기본 텍스트 뷰를 List로 대체하고, 리스트의 자식으로 1,2번쨰 랜드마크와 함께 LandmarkRow 인스턴스를 제공합니다.
+Replace the default Text view with a List, and provide LandmarkRow instances with the first two landmarks as the list’s children.
+
+* 프리뷰는 iOS에 적절한 리스트 스타일로 렌더링 된 두 개의 랜드마크를 보여줍니다.
+The preview shows the two landmarks rendered in a list style that’s appropriate for iOS.
+
+### Section 4 학습
+
+*
+
+## Section 5 - 동적 리스트 만들기(Make the List Dynamic)
+
+리스트의 요소들을 개별적으로 특정하는 대신, 컬렉션으로부터 바로 열을 생성할 수 있어요.
+Instead of specifying a list’s elements individually, you can generate rows directly from a collection.
+
+데이터 컬렉션이나 컬렉션 내 각 요소에 대한 뷰를 제공하는 클로저를 전달함으로서 컬렉션의 요소들을 표시하는 리스트를 생성할 수 있어요. 리스트는 컬렉션의 각 요소들을 자식 뷰로 전달받은 클로저를 사용해 변환합니다.
+You can create a list that displays the elements of a collection by passing your collection of data and a closure that provides a view for each element in the collection. The list transforms each element in the collection into a child view by using the supplied closure.
+
+### Step 1
+
+두 개의 정적 랜드마크 열을 제거하고 대신 List 이니셜라이저에 모델 데이터의 랜드마크 배열을 전달합니다.
+Remove the two static landmark rows, and instead pass the model data’s landmarks array to the List initializer.
+
+* 리스트는 'identifiable' 데이터와 함꼐 작동합니다. 두 가지 방식 중 하나로 식별할 수 있는 데이터를 만들 수 있는데요. 하나는 데이터와 함께 각 요소를 고유하게 식별하는 프로퍼티에 대한 key path를 전달하거나 , 데이터 타입이 Identifiable 프로토콜을 준수하도록 만드는 것입니다. 
+Lists work with identifiable data. You can make your data identifiable in one of two ways: by passing along with your data a key path to a property that uniquely identifies each element, or by making your data type conform to the Identifiable protocol.
+
+### Step 2
+
+클로저로부터 LandmarkRow를 반환함으로서 동적으로 생성된 리스트를 완성하세요.
+Complete the dynamically-generated list by returning a LandmarkRow from the closure.
+
+* 이렇게 하면 랜드마크 배열의 각 요소에 대해 하나의 LandmarkRow가 생성됩니다.
+This creates one LandmarkRow for each element in the landmarks array.
+
+다음으로 List 코드를 Landmark 타입으로 Identifiable을 준수하도록 추가함으로서 단순화시켜볼게요.
+Next, you’ll simplify the List code by adding Identifiable conformance to the Landmark type.
+
+### Step 3
+
+Landmark.swift 로 돌아가 Identifiable 프로토콜을 준수하도록 선언합니다.
+Switch to Landmark.swift and declare conformance to the Identifiable protocol.
+
+Landmark 데이터는 이미지 id 프로퍼티를 가지고 있어요 이 id는 Identifiable 프로토콜에 필요하죠. 이렇게 되면 데이터를 읽을 떄 이것을 디코딩하기 위한 하나의 프로퍼티를 추가할 필요만 있을 뿐이에요.
+The Landmark data already has the id property required by Identifiable protocol; you only need to add a property to decode it when reading the data.
+
+### Step 4
+
+LandmarkList로 돌아가서 id 파라미터를 제거해주세요.
+Switch back to LandmarkList.swift and remove the id parameter.
+
+* 이제부터 Landmark 요소 컬렉션을 바로 사용할 수 있어요.
+From now on, you’ll be able to use collections of Landmark elements directly.
+
+### Section 5 학습
+* List 학습
 
 ## Building Lists and Navigation 주요 내용 정리
 
+* List 를 사용하면 정적, 동적으로 뷰를 구성할 수 있다.
+* List 사용시에 identifiable data가 함께 사용되어야 하는데, 그래서 List는 id 파라미터를 제공한다.
+* id 파라미터를 제공하는 방법도 있지만, 애초에 사용하는 Model의 타입에 Identifiable 프로토콜을 준수하도록 추가하는 방법이 조금 더 깔끔한 방법이 된다. (물론 Model에서도 id 역할을 하는 id 프로퍼티가 필요하다)  
 
