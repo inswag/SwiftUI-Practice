@@ -169,6 +169,54 @@ Complete the row by adding an image before the text view, and a spacer after it.
 
 * 
 
+## Section 3 - Row 프리뷰 커스터마이징(Customize the Row Preview)
+
+Xcode의 Canvas는 PreviewProvider 프로토콜을 준수하는 현재 에디터 내 모든 타입을 자동적으로 인식하고 표시합니다. Preview Provider는 크기를 구성하기 위한 옵션과 기기와 함께 하나 이상의 뷰를 반환해요. 
+Xcode’s canvas automatically recognizes and displays any type in the current editor that conforms to the PreviewProvider protocol. A preview provider returns one or more views, with options to configure the size and device.
+
+아주 유용한 프리뷰를 정확하게 렌더링하기 위해 프리뷰 프로바이더로 부터 반환된 컨텐츠를 커스터마이징 할 수 있어요.
+You can customize the returned content from a preview provider to render exactly the previews that are most helpful to you.
+
+### Step 1
+
+LandmarkRow_Previews에서 landmark 파라미터에 landmarks 배열의 두 번쨰 요소를 업데이트합니다. 
+In LandmarkRow_Previews, update the landmark parameter to be the second element in the landmarks array.
+
+* 프리뷰는 즉시 첫 번째 대신 두 번쨰 샘플 랜드마크를 보여주기위해 변경됩니다.
+The preview immediately changes to show the second sample landmark instead of the first.
+
+### Step 2
+
+previewLayout(_:) modifier를 사용해 리스트의 열에 가까운 사이즈를 설정해주세요.
+Use the previewLayout(_:) modifier to set a size that approximates a row in a list.
+
+* Preview Provider로부터 여러 프리뷰를 반환하기 위한 Group 을 사용 할 수 있어요.
+You can use a Group to return multiple previews from a preview provider.
+
+### Step 3
+
+Group 내에 반환된 열을 래핑하고 다시 첫 번째 열을 추가해주세요. 
+Wrap the returned row in a Group, and add the first row back again.
+
+* Group 은 뷰 컨텐츠를 그룹핑하는 하나의 컨테이너입니다. Xcode는 그룹의 자식 뷰들을 Canvas 내 분리된 프리뷰로 렌더링합니다. 
+Group is a container for grouping view content. Xcode renders the group’s child views as separate previews in the canvas.
+
+### Step 4
+
+코드 단순화를 위해, previewLayout(_:) call을 그룹의 바깥으로 옮겨주세요.
+To simplify the code, move the previewLayout(_:) call to the outside of the group’s child declarations.
+
+뷰의 자식은 preview configuration과 같은 뷰의 문맥적 설정을 상속합니다. 
+A view’s children inherit the view’s contextual settings, such as preview configurations.
+
+* preview provider 내에서 작성된 코드는 Canvas 내에서 Xcode가 표시하는 것에 대해서만 변화시킵니다.
+The code you write in a preview provider only changes what Xcode displays in the canvas.
+
+### Section 3 학습
+
+* Group 은 뷰 컨텐츠를 그룹핑하는 하나의 컨테이너이다. Xcode는 그룹의 자식 뷰들을 Canvas 내 분리된 프리뷰로 렌더링합니다.
+
+
 ## Building Lists and Navigation 주요 내용 정리
 
 
