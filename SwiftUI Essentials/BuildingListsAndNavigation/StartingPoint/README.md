@@ -113,6 +113,62 @@ Tip)You can create groups of existing items by selecting the items to add to the
 
 * 
 
+## Section 2 - Row View 생성하기(Create the Row View)
+
+이번 튜토리얼에서 만들어볼 첫 번쨰 뷰는 각 랜드마크에 대한 디테일한 내용을 표시하기 위한 열(row) 입니다. 이 row view는 보여줄 landmark 프로퍼티 안에 정보를 저장해요. 나중에 랜드마크 리스트에 여러 열들을 결합할 거에요.
+The first view you’ll build in this tutorial is a row for displaying details about each landmark. This row view stores information in a property for the landmark it displays, so that one view can display any landmark. Later, you’ll combine multiple rows into a list of landmarks.
+
+### Step 1
+
+새 SwiftUI view 를 Views 그룹에 LandmarkRow 이름으로 만들어주세요.
+Create a new SwiftUI view in the Views group named LandmarkRow.swift.
+
+### Step 2
+
+만약 프리뷰가 보이지 않는다면 Editor > Canvas 를 선택하여 canvas를 보여주세요. 그리고 Resume(14. 3 Xcode 버전 기준 새로고침 화살표 표시)을 클릭해주세요.
+If the preview isn’t visible already, show the canvas by choosing Editor > Canvas, and then click Resume.
+
+### Step 3
+
+LandmarkRow의 저장 프로퍼티 landmark 를 추가해주세요.
+Add landmark as a stored property of LandmarkRow.
+
+* landmark 프로퍼티를 추가할 때, 프리뷰는 작동을 멈춥니다. 왜냐하면 LandmarkRow 타입은 초기화 동안 landmark 인스턴스가 필요하기 떄문이에요(landmark 는 타입만 선언해 둔 상태인데, 구조체는 초기화 시 내부 프로퍼티가 초기화되어야 합니다).
+When you add the landmark property, the preview stops working, because the LandmarkRow type needs a landmark instance during initialization.
+
+프리뷰를 고치기 위해 preview provider 를 수정해볼게요.
+To fix the preview, you’ll need to modify the preview provider.
+
+### Step 4
+
+LandmarkRow_Previews의 static 프로퍼티 previews에 landmark 파라피터를 LandmarkRow 이니셜라이저에 랜드마크 배열의 첫번쨰 요소와 함꼐 추가해주세요.  
+In the previews static property of LandmarkRow_Previews, add the landmark parameter to the LandmarkRow initializer, specifying the first element of the landmarks array.
+
+* 프리뷰는 텍스트 Hello, world! 를 표시합니다. 
+The preview displays the text, “Hello, World!”.
+
+이걸 수정하면, row의 레이아웃을 만들 수 있어요.
+With that fixed, you can build the layout for the row.
+
+### Step 5
+
+HStack에 현재 텍스트 뷰를 임베딩합니다.
+Embed the existing text view in an HStack.
+
+### Step 6
+
+텍스트 뷰를 'landmark' 프로퍼티의 'name' 을 사용하도록 수정해주세요.
+Modify the text view to use the landmark property’s name.
+
+### Step 7
+
+텍스트 뷰 전에 이미지를 추가해서 열을 완성시켜주세요. 그리고 텍스트 뷰 후에 Spacer() 를 추가합니다.
+Complete the row by adding an image before the text view, and a spacer after it.
+
+### Section 2 학습
+
+* 
+
 ## Building Lists and Navigation 주요 내용 정리
 
 
