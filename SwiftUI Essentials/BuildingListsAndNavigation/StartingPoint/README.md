@@ -284,9 +284,213 @@ From now on, you’ll be able to use collections of Landmark elements directly.
 ### Section 5 학습
 * List 학습
 
+## Section 6 - 리스트와 디테일 사이에 네비게이션 설정하기(Set Up Navigation Between List and Detail)
+
+리스트는 각각 렌더링되지만 아직 각 랜드마크를 디테일 페이지를 보기 위해서 탭할 수 없습니다.
+The list renders properly, but you can’t tap an individual landmark to see that landmark’s detail page yet.
+
+탐색 기능을 NavgationView에 임베딩한 다음 NavigationLink에 각 row를 중첩해 목적 뷰로의 전환을 설정하여 리스트에 탐색 기능을 추가할게요. 
+You add navigation capabilities to a list by embedding it in a NavigationView, and then nesting each row in a NavigationLink to set up a transtition to a destination view.
+
+이전 튜토리얼에서 만든 컨텐츠를 사용해 디테일 뷰를 준비하고 리스트 뷰 대신 표시할 메인 컨텐츠 뷰를 업데이트할게요.
+Prepare a detail view using the content you created in the previous tutorial and update the main content view to display the list view instead.
+
+### Step 1
+
+새로운 SwiftUI view 를 LandmarkDetail 이름으로 생성합니다.
+Create a new SwiftUI view named LandmarkDetail.swift.
+
+### Step 2
+
+LandmarkDetail에 ContentView의 body 프로퍼티의 컨텐츠를 복사합니다.
+Copy the contents of the body property from ContentView into LandmarkDetail.
+
+### Step 3
+
+ContentView를 LandmarkList를 표시하도록 변경합니다.
+Change ContentView to instead display LandmarkList.
+
+다음 몇 개의 단계 후에 리스트와 디테일 뷰 사이의 네비게이션을 추가할거에요.
+In the next few steps, you’ll add navigation among your list and detail views.
+
+### Step 4
+
+동적으로 생성된 랜드마크 리스트를 NavigationView 내 임베딩합니다.
+Embed the dynamically generated list of landmarks in a NavigationView.
+
+### Step 5
+
+navigationTitle(_:) modifier 메서드를 호출해 리스트를 표시할 때 navigation bar 의 타이틀을 설정합니다.
+Call the navigationTitle(_:) modifier method to set the title of the navigation bar when displaying the list.
+
+### Step 6
+
+리스트의 클로저 내부에 반환된 행을 NavigationLink로 래핑하여 LandmarkDetail 뷰를 대상으로 지정합니다.
+Inside the list’s closure, wrap the returned row in a NavigationLink, specifying the LandmarkDetail view as the destination.
+
+### Step 7
+
+라이브 모드로 전환하여 프리뷰에서 바로 탐색을 시도할 수 있어요. 라이브 프리뷰 버튼을 클릭하고 랜드마크를 탭하여 상세 페이지를 방문해보세요.
+You can try out the navigation directly in the preview by switching to live mode. Click the Live Preview button and tap a landmark to visit the detail page.
+
+### Section 6 학습
+* NavigationView 사용
+* NavigationLink 사용
+
+## Section 7 - 자식 뷰로 데이터 전달하기(Pass Data into Child Views)
+
+LandmarkDetail 뷰는 여전히 하드코딩된 것들로 랜드마크를 보여주기 위해 사용하고 있어요. LandmarkRow와 같이 LandmarkDetail 타입과 이루어진 뷰들도 데이터의 소스로서 landmark 프로퍼티를 사용할 필요가 있어요.
+The LandmarkDetail view still uses hard-coded details to show its landmark. Just like LandmarkRow, the LandmarkDetail type and the views it comprises need to use a landmark property as the source for their data.
+
+자식 뷰들로 시작해서 CircleImage, MapView, LandmarkDetail을 하드코딩이 아닌 전달받은 데이터를 표시하도록 변환해볼게요.
+Starting with the child views, you’ll convert CircleImage, MapView, and then LandmarkDetail to display data that’s passed in, rather than hard-coding each row.
+
+### Step 1
+
+CircleImage.swift 에 CircleImage에 대한 저장 프로퍼티 image 를 추가할게요.
+In CircleImage.swift, add a stored image property to CircleImage.
+
+* 이렇게 하는 것은 SwiftUI를 사용해서 뷰를 만들 떄의 일반적인 패턴이에요. 커스텀 뷰들은 종종 특정 뷰에 대한 일련의 modifier 들을 캡슐화하고 래핑해요.
+This is a common pattern when building views using SwiftUI. Your custom views will often wrap and encapsulate a series of modifiers for a particular view.
+
+### Step 2
+
+프리뷰 프로바이더를 Turtle Rock 이미지를 전달하기 위해 업데이트합니다.
+Update the preview provider to pass the image of Turtle Rock.
+
+* 프리뷰 로직을 고쳐왔음에도, 프리뷰는 업데이트에 실패하는데 빌드가 실패하기 떄문입니다. circle image를 인스턴스화하는 디테일 뷰는 마찬가지로 인풋 파라미터가 필요해요.
+Even though you’ve fixed the preview logic, the preview fails to update because the build fails. The detail view, which instantiates a circle image, needs an input parameter as well.
+
+### Step 3
+
+MapView.swift에 coordinate 프로퍼티를 MapView에 추가하고 프리뷰 프로바이더에 고정된 좌표를 전달하도록 업데이트합니다.
+In MapView.swift, add a coordinate property to MapView and update the preview provider to pass a fixed coordinate.
+
+* 또한 이러한 변경은 빌드에 영향을 끼치는데 디테일 뷰는 새로운 파라미터를 필요로하는 지도 뷰를 가지기 떄문입니다. 곧 고쳐볼게요. 
+This change also affects the build because the detail view has a map view that needs the new parameter. You’ll fix the detail view soon.
+
+### Step 4
+
+좌표 값에 기초에 지역을 업데이트하는 메서드를 추가할게요.
+Add a method that updates the region based on a coordinate value.
+
+### Step 5
+
+onAppear view modifier 를 현재의 좌표에 근거해 지역의 계산을 트리거하는 지도에 추가해주세요.
+Add an onAppear view modifier to the map that triggers a calculation of the region based on the current coordinate.
+
+### Step 6
+
+LandmarkDetail.swift 에서 LandmarkDetail 타입에 Landmark 프로퍼티를 추가해주세요.
+In LandmarkDetail.swift, add a Landmark property to the LandmarkDetail type.
+
+### Step 7
+
+LandmarkList.swift 에서 목적지인 LandmarkDetail 에 현재의 랜드마크를 전달해주세요.
+In LandmarkList.swift, pass the current landmark to the destination LandmarkDetail.
+
+### Step 8
+
+LandmarkDetail.swift 에서 커스텀 타입에 필요한 데이터를 전달하세요.
+In the LandmarkDetail file, pass the required data to your custom types.
+
+* 모든 연결이 완료되면 프리뷰는 다시 작동하기 시작해요.
+With all of the connections established, the preview begins working again.
+
+### Step 9
+
+VStack 에서 ScrollView 로 컨테이너를 변경합니다. 따라서 유저는 설명된. 컨텐츠를 스크롤 할 수 있고 더이상 필요치 않은 Spacer를 삭제합니다.
+Change the container from a VStack to a ScrollView so the user can scroll through the descriptive content, and delete the Spacer, which you no longer need.
+
+### Step 10
+
+마지막으로 navigationTitle(_:) modifier 를 호출해 navigation bar 에 title 을 디테일 뷰가 보여질 때 부여할 수 있도록 하고 navigationBarTitleDisplayMode(_:) modifier 를 호출해 제목을 인라인으로 표시합니다.
+Finally, call the navigationTitle(_:) modifier to give the navigation bar a title when showing the detail view, and the navigationBarTitleDisplayMode(_:) modifier to make the title appear inline.
+
+* navigation 변화는 뷰가 네비게이션 스택의 일부일 경우에만 적용됩니다. 
+The navigation changes only have an effect when the view is part of a navigation stack.
+
+### Step 11
+
+라이브 프리뷰로 전환해 리스트에서 탐색할 떄 정확한 랜드마크를 보여주는 디테일 뷰를 확인해보세요.
+Switch to the live preview to see the detail view show the correct landmarks when you navigate from the list.
+
+### Section 7 학습
+* SwiftUI에서 뷰에 데이터를 전달하는 방식
+
+## Section 8 - 프리뷰를 동적으로 생성하기
+
+다음은, LandmarkList_Previews의 preview provider에 코드를 추가해 서로 다른 기기 사이즈에 리스트 뷰의 프리뷰를 렌더링하도록 해볼거에요. 기본적으로 프리뷰는 active scheme 내에서 디바이스의 사이즈에 렌더링 됩니다. previewDevice(_:) modifier 메서드를 호출해 프리뷰의 기기를 변경할게요.      
+Next, you’ll add code to the LandmarkList_Previews preview provider to render previews of the list view at different device sizes. By default, previews render at the size of the device in the active scheme. You can change the preview device by calling the previewDevice(_:) modifier method.
+
+### Step 1
+
+현재의 리스트 프리뷰를 변경하여 iPhone SE의 사이즈로 렌더링 되도록 해볼게요.
+Start by changing the current list preview to render at the size of an iPhone SE.
+
+Xcode의 scheme 메뉴에 보이는 모든 디바이스의 이름을 사용할 수 있어요.
+You can provide the name of any device as it appears in Xcode’s scheme menu.
+
+### Step 2
+
+리스트 프리뷰내 ForEach 인스턴스 내부로 LandmarkList를 임배딩합니다. 데이터로 기기의 이름의 배열을 사용할게요.
+Within the list preview, embed the LandmarkList in a ForEach instance, using an array of device names as the data.
+
+* ForEach는 리스트로서 같은 방식으로 컬렉션 상에서 작동하는데, 이것은 stack, list, group 등과 같은 자식 뷰를 사용하는 어느곳에서나 사용할 수 있다는 것을 의미합니다.데이터의 요소들이 여기서 사용한 문자열과 같이 단순한 값타입 일 때, \.self 를 identifier에 대한 key path로서 사용할 수 있어요.
+ForEach operates on collections the same way as the list, which means you can use it anywhere you can use a child view, such as in stacks, lists, groups, and more. When the elements of your data are simple value types — like the strings you’re using here — you can use \.self as key path to the identifier.
+
+### Step 3
+
+previewDisplayName(_:) modifier 를 사용해 프리뷰의 레이블로서 기기 이름을 추가합니다.
+Use the previewDisplayName(_:) modifier to add the device names as labels for the previews.
+
+### Step 4
+
+모든 Canvas에서 렌더링되는 뷰를 서로 다른 기기에서 비교해보세요.
+You can experiment with different devices to compare the renderings of your views, all from the canvas.
+
+### Section 8 학습
+* Preview Provider 를 서로 다른 기기 사이즈에서 테스트 하도록 변경하는 방법
+
+### Check Your Understanding
+
+Q 1 of 4
+List이외에 어떤 타입이 컬렉션으로부터 동적 뷰 리스트를 나타낼 수 있을까요?
+N1) Group
+N2) ForEach
+N3) UITableView
+
+A 1 of 4
+N1) X - Group과 stack은 뷰와 다른 컨텐츠를 구성하기 위해 사용하지만 컬렉션으로부터 바로는 불가능하다.
+N2) O - ForEach 인스턴스를 List 내부에 혹은 다르 컨테이터 타입에 동적 리스트를 만들기 위해 둡니다.
+
+Q 2 of 4
+뷰 'List'를 Identifiable 요소들의 컬렉션으로부터 생성할 수 있습니다. 어떤 접근을 해야 Identifiabel 프로토콜을 준수하지 않고 요소들의 컬렉션을 채택하기 위해 사용할 수 있을까요?
+A 2 of 4
+N3) 데이터의 key path를 List(_:id:) 에 전달합니다.
+(설명) List를 생성할 떄 두 번쨰 파라미터로 고유하게 식별할 수 있는 프로퍼티에 Key path 를 전달합니다.  
+Q 3 of 4
+다른 뷰로 탐색하기 위해 탭할 수 있는 '리스트'의 열을 만들기 위해 사용하는 타입은?
+A 3 of 4
+N1) NavigationLink
+(설명) 목적 뷰와 열의 컨텐츠를 NavigationLink를 선언할 때 제공합니다.
+
+Q 4 of 4
+다음의 선택지 중 뷰를 미리보기 하기 위해 기기를 설정하는 방식이 '아닌' 것은 무엇일까요?
+N1) active scheme에 선택된 시뮬레이터를 변경한다.
+N2) Xcode의 preferences 내 Canvas Settings에 다른 선택을 한다.
+N3) 하나 이상의 기기를 previewDevice(_:) 메서드를 사용해 특정짓는다.
+N4) 개발 기기를 연결하고 Device Preview 버튼을 클릭한다.
+
+A 4 of 4
+N2) 
+(설명) active scheme, code 혹은 기기에서 바로 미리보기 함으로서 사용을 위한 디바이스를 특정할 수 있습니다. preferences 를 살펴볼 필요가 없어요.
+
+
 ## Building Lists and Navigation 주요 내용 정리
 
 * List 를 사용하면 정적, 동적으로 뷰를 구성할 수 있다.
 * List 사용시에 identifiable data가 함께 사용되어야 하는데, 그래서 List는 id 파라미터를 제공한다.
 * id 파라미터를 제공하는 방법도 있지만, 애초에 사용하는 Model의 타입에 Identifiable 프로토콜을 준수하도록 추가하는 방법이 조금 더 깔끔한 방법이 된다. (물론 Model에서도 id 역할을 하는 id 프로퍼티가 필요하다)  
+* SwiftUI에서는 각 뷰에서 데이터를 직접 사용하기 보다는 상위 뷰에서 데이터를 전달하는 방식의 패턴을 사용하는 것이 권장된다.
 
