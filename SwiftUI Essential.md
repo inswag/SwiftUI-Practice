@@ -2,7 +2,7 @@
 
 ## 정리
 
-### State 
+### - @State 
 
 1. State를 뷰에 추가하려면 @State 어트리뷰트를 앞에 붙여주는 프로퍼티(property)를 사용하면 된다. (Ex. @State prviate var propertyName: T)
 
@@ -14,7 +14,7 @@
  
 5. State Property를 사용하여 View와 View의 Subviews에 특정 정보(information that's specific)을 보유하기 때문에, 항상 state property를 'private' 으로 생성한다.
 
-### List
+### - List
 
 1. List는 식별가능한(identifiable) 데이터와 함께 작동한다. 두 가지 방식 중 하나를 선택해서 만들 수 있다.
 
@@ -23,11 +23,11 @@
 
 2. List 처럼 collection으로 부터 뷰를 동적으로 나타내기 위한 방법으로는 ForEach가 있다.
 
-### Group
+### - Group
 
 1. Group과 Stack은 뷰와 다른 컨텐츠를 구성하기 위해 사용하지만 List 처럼 collection 으로부터 직접적으로는 사용할 수 없다.
 
-### Navigation View & Navigation Link
+### - Navigation View & Navigation Link
  
 1. 리스트를 사용할 경우 NavigationView로 감싸게 되면 UIKit 에서 사용하던 UINavigationController 처럼 화면을 관리할 수 있게 된다.
  
@@ -35,7 +35,7 @@
  
 3. NavigationLink는 선언 시 목적 뷰와 열의 컨텐츠를 제공한다.
 
-### Device Setting
+### - Device Setting
 
 1. 뷰를 미리보기 위해 디바이스를 설정하는 방식은 3가지가 있다.
 
@@ -45,7 +45,7 @@
 
 Tip) Xcode's preference 에 들어가서 삽질하는 것을 피하자!
 
-### Observable Object
+### - Observable Object
 
 1. 리스트에 내가 좋아하는 요소에 대한 즐겨찾기를 선택하는 기능이 있고 그 값을 저장 및 해제하여 앱에서 보여준다고 하자. 어떻게 할 것인가? 모델에 직접 State를 추가하여 어떻게든 뷰를 새로 그린다는 것은 SwiftUI의 구조상 바람직하지 않을 것이다. 바로 여기에 대한 대답이 Observable Object 이다.
 
@@ -106,12 +106,5 @@ Tip) Xcode's preference 에 들어가서 삽질하는 것을 피하자!
 1-1. @EnvironmentObject : 뷰 계층 구조에서 아래에 있는 뷰에서 이 어트리뷰트를 사용하여 더 높은 뷰에서 데이터를 받습니다.
 1-2. environmentObject(_:) Modifier : 하향식으로 데이터가 전달된다. 뷰 계층 구조의 더 아래에 있는 뷰가 환경을 통해 전달된 데이터 개체를 읽을 수 있도록 이 수정자를 적용합니다.
 
-
-
-
-
-
-
-3. SwiftUI는 생성한 observable object를 구독(Subscribe)하고 데이터에 변화가 있을 때마다 리프레쉬가 필요한 모든 뷰를 업데이트 한다.
 
 

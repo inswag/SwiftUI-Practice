@@ -8,5 +8,5 @@ inswag's SwiftUI Tutorial Practice Repository
 
 ## SwiftUI 중요 개념 정리는 아래에 정리되었습니다.
 * SwiftUI Essential.md
-* App Design and Layout.md (Comming Soon)
-* Framework Integration.md (Comming Soon)
+* App Design and Layout.md (Coming Soon)
+* Framework Integration.md (Coming Soon)
